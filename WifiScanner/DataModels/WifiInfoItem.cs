@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using ManagedNativeWifi;
 
 namespace WifiScanner.DataModels
 {
@@ -24,17 +23,17 @@ namespace WifiScanner.DataModels
 
     public class WifiInfoItem
     {
-        public WifiInfoItem(BssNetworkPack _BNP)
-        {
-            SSID = _BNP.Ssid.ToString();
-            BSSID = _BNP.Bssid.ToString();
-            Band = _BNP.Band;
-            Frequency = _BNP.Frequency;
-            Channel = _BNP.Channel;
-            LinkQuality = _BNP.LinkQuality;
-            RSSI = _BNP.SignalStrength;
-            LastUpdated = DateTime.Now.TimeOfDay;
-        }
+        //public WifiInfoItem(BssNetworkPack _BNP)
+        //{
+        //    SSID = _BNP.Ssid.ToString();
+        //    BSSID = _BNP.Bssid.ToString();
+        //    Band = _BNP.Band;
+        //    Frequency = _BNP.Frequency;
+        //    Channel = _BNP.Channel;
+        //    LinkQuality = _BNP.LinkQuality;
+        //    RSSI = _BNP.SignalStrength;
+        //    LastUpdated = DateTime.Now.TimeOfDay;
+        //}
 
         public string SSID { get; set; }
         public string BSSID { get; set; }
@@ -43,7 +42,7 @@ namespace WifiScanner.DataModels
         public int RSSI { get; set; }
         public int LinkQuality { get; set; }
         public float Band { get; set; }
-        public TimeSpan LastUpdated {get; set;}
+        public TimeSpan LastUpdated { get; set; }
     }
 
     //What we have access to:

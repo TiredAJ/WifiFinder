@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using ManagedNativeWifi;
+
 
 namespace WifiScanner.DataModels
 {
@@ -40,14 +40,12 @@ namespace WifiScanner.DataModels
 
         public static List<WifiInfoItem> GetData()
         {
-            List<WifiInfoItem> Temp = new List<WifiInfoItem>();
+            //get data
 
-            IEnumerable<BssNetworkPack> BNP = NativeWifi.EnumerateBssNetworks();
+                     
 
-            foreach (var Item in BNP)
-            {Temp.Add(new WifiInfoItem(Item));}
-
-            return Temp;
+            //return Temp;
+            throw new NotImplementedException();
         }
 
     }

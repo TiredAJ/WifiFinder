@@ -19,8 +19,8 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Android" Version="11.0.4" />
-    <PackageReference Include="NetworkCommsDotNet" Version="3.0.3" />
-    <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.3" />
+    <PackageReference Include="XamarinNetworkTools" Version="0.2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
