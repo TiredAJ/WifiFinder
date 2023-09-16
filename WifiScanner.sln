@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34004.107
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WifiScanner", "WifiScanner\WifiScanner.csproj", "{EDFC718E-AC84-46E2-943A-C759E9D09064}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WifiScanner.Android", "WifiScanner.Android\WifiScanner.Android.csproj", "{FE3778AC-8370-477D-9633-6F593E19FDB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WifiScanner.Desktop", "WifiScanner.Desktop\WifiScanner.Desktop.csproj", "{9A9B4BAC-3CA3-41EC-B1AE-F4C2707729B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDFC718E-AC84-46E2-943A-C759E9D09064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDFC718E-AC84-46E2-943A-C759E9D09064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDFC718E-AC84-46E2-943A-C759E9D09064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDFC718E-AC84-46E2-943A-C759E9D09064}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE3778AC-8370-477D-9633-6F593E19FDB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE3778AC-8370-477D-9633-6F593E19FDB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE3778AC-8370-477D-9633-6F593E19FDB1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FE3778AC-8370-477D-9633-6F593E19FDB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE3778AC-8370-477D-9633-6F593E19FDB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE3778AC-8370-477D-9633-6F593E19FDB1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9A9B4BAC-3CA3-41EC-B1AE-F4C2707729B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A9B4BAC-3CA3-41EC-B1AE-F4C2707729B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A9B4BAC-3CA3-41EC-B1AE-F4C2707729B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A9B4BAC-3CA3-41EC-B1AE-F4C2707729B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E4A8843-B39D-4AD9-AA3F-C13496FCDD4E}
+	EndGlobalSection
+EndGlobal
