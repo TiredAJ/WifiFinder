@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WifiScanner.DataModels;
+using Android.App;
+using Android.Content;
 
 namespace WifiScanner.Services
 {
@@ -13,15 +15,24 @@ namespace WifiScanner.Services
     /// ToDoListService
     /// </summary>
     // Data is gathered here?
+    [Activity]
     public class WifiInfoService
     {
+        private Context? CTX = null;
+
+        public WifiInfoService()
+        {this.CTX = Android.App.Application.Context;}
+
         private List<WifiInfoItem> WifiInfoItems = new List<WifiInfoItem>();
 
         //public IEnumerable<WifiInfoItem> GetItems() => WifiInfoItems;
         public IEnumerable<WifiInfoItem> GetItems()
         {
-            WifiInfoItems = WifiData.GetData();
+            //WifiDataService.CreateIntent(new WifiDataService(), "START_SCAN");
 
+            WifiDataService WDS = new WifiDataService();
+
+            WDS.OnCreate();
 
             return WifiInfoItems;
         }

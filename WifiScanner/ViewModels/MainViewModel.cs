@@ -22,7 +22,7 @@ namespace WifiScanner.ViewModels
 
             tmr_Updater.Interval = new System.TimeSpan(0, 0, 10);
             tmr_Updater.Tick += Tmr_Updater_Tick;
-            tmr_Updater.Start();
+            //tmr_Updater.Start();
         }
 
         private void Tmr_Updater_Tick(object? sender, System.EventArgs e)

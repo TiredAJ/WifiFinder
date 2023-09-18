@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CA1422: Validate platform compatibility
+dotnet_diagnostic.CA1422.severity = silent

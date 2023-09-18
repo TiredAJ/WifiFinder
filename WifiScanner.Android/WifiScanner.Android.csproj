@@ -9,6 +9,8 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+    <Company>github.com/TiredAJ</Company>
+    <Authors>TiredAJ</Authors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,9 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia.Android" Version="11.0.4" />
     <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.3" />
-    <PackageReference Include="XamarinNetworkTools" Version="0.2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
