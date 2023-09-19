@@ -32,6 +32,7 @@ namespace WifiScanner.Services
 
             WifiDataService WDS = new WifiDataService();
 
+            //WDS.OnCreate(new Android.OS.Bundle(), new Android.OS.PersistableBundle());
             WDS.OnCreate();
 
             return WifiInfoItems;
