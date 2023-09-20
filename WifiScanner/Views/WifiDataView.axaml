@@ -7,10 +7,11 @@
              x:Class="WifiScanner.Views.WifiDataView"
 			 x:DataType="vm:WifiInfoViewModel">
 
-		<DataGrid DockPanel.Dock="Bottom" ItemsSource="{Binding WifiItems}" AutoGenerateColumns="True"
+	<!--<DataGrid DockPanel.Dock="Bottom" ItemsSource="{Binding WifiItems}" 
 				  IsReadOnly="True" GridLinesVisibility="All" BorderThickness="2"
 				  BorderBrush="Gray" x:Name="dgrd_Data">
-		</DataGrid>
+			
+		</DataGrid>-->
 		
 
 		<!--

@@ -9,7 +9,7 @@
 		x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Wifi Scanner">
-
-	<views:WifiDataView DataContext="{Binding WifiInfoList}"/>
+	
+	<views:MainView DataContext="{Binding WifiInfoList}"/>
 	
 </Window>

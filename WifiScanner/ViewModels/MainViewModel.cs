@@ -15,10 +15,13 @@ namespace WifiScanner.ViewModels
         /// </summary>
         public WifiInfoViewModel WifiInfoList { get; private set; }
         private DispatcherTimer tmr_Updater = new DispatcherTimer();
+#if ANDROID
+        private WifiInfoService Service;
 
         public MainViewModel()
         {
             UpdateInfoList();
+            Service = new WifiInfoService();
 
             tmr_Updater.Interval = new System.TimeSpan(0, 0, 10);
             tmr_Updater.Tick += Tmr_Updater_Tick;
@@ -33,8 +36,11 @@ namespace WifiScanner.ViewModels
 
         private void UpdateInfoList()
         {
-            var Service = new WifiInfoService();
+            if (Service == null)
+            {Service = new WifiInfoService();}
+
             WifiInfoList = new WifiInfoViewModel(Service.GetItems());
         }
+#endif
     }
 }
