@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using WifiScanner.DataModels;
 using Android.App;
 using Android.Content;
+using System.Threading;
 
 namespace WifiScanner.Services
 {
@@ -34,6 +35,13 @@ namespace WifiScanner.Services
 
             //WDS.OnCreate(new Android.OS.Bundle(), new Android.OS.PersistableBundle());
             WDS.OnCreate();
+
+            do
+            {
+                Thread.Sleep(1000);
+
+                WDS.Scan();
+            } while (true);
 
             return WifiInfoItems;
         }

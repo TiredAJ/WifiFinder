@@ -2,35 +2,20 @@
 using System.Linq;
 using System.Collections.Generic;
 using Android.Net.Wifi;
-using Microsoft.CodeAnalysis;
-
-using SDD =  System.Diagnostics.Debug;
 using Android.Content;
-using ANW = Android.Net.Wifi;
 using Android.App;
 using Android.OS;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Net.WebSockets;
-using Org.Apache.Http.Conn.Routing;
-using Java.Util.Concurrent;
-using System.Threading.Tasks;
 using Android.Net;
-using Android.Content.PM;
-using Android.Runtime;
 using Android;
-using Android.Webkit;
+
+//using ANW = Android.Net.Wifi;
+using SDD =  System.Diagnostics.Debug;
 
 namespace WifiScanner.DataModels
 {
     [Service(Exported =true)]
-    //[IntentFilter(new[] {START_SCAN, STOP_SCAN})]
-    //[Activity(MainLauncher =true, Label ="WifiDataService")]
-    //public class WifiDataService: Android.App.Activity
     public class WifiDataService: Service
     {
-        //public const string START_SCAN = "com.TiredAJ.WifiScanner.START_SCAN";
-        //public const string STOP_SCAN = "com.TiredAJ.WifiScanner.STOP_SCAN";
-
         /*public WifiDataService()
         {
             var NetworkData = NativeWifi.EnumerateAvailableNetworks();
@@ -64,19 +49,13 @@ namespace WifiScanner.DataModels
 
         public static WifiManager? WM;
 
-        ConnectivityManager? CM;
-
-        public WifiManager.ScanResultsCallback ScanResultsCallback { get; set; }
-
+        private ConnectivityManager? CM;
         private NC NetCB { get; set; }
 
-        private IExecutorService EXC = Executors.NewSingleThreadExecutor();
+        private bool IsRegistered = false;
 
-        //public override void OnCreate(Bundle? savedInstanceState, PersistableBundle? persistentState)
         public override void OnCreate()
-        {
-            //base.OnCreate(savedInstanceState, persistentState);
-            
+        {            
             Context temp = Android.App.Application.Context;
 
             SDD.Write($"access wifi state: {temp.CheckSelfPermission(Manifest.Permission.AccessWifiState)}");
@@ -93,30 +72,32 @@ namespace WifiScanner.DataModels
 
             NetCB.Initialise(CB);
 
-            CM.RegisterNetworkCallback
-            (
-                new NetworkRequest.Builder().AddTransportType(TransportType.Wifi).Build(),
-                NetCB
-            );
-
-            //ScanResultsCallback = new SRC(CB);
-            //
-            //WM.RegisterScanResultsCallback(EXC, ScanResultsCallback);
-            //
-            //WM.RegisterScanResultsCallback(Executors.NewSingleThreadScheduledExecutor(), ScanResultsCallback);
-
-            //WM.StartScan();
-
-            System.Diagnostics.Debug.WriteLine($"Scan Results: {WM.ScanResults.Count}");
+            Scan();
         }
 
-        public static Intent CreateIntent(Context _Context, string _Action)
+        //temp
+        public void Scan()
         {
-            var _Intent = new Intent(_Context, typeof(WifiDataService));
-            _Intent.SetAction(_Action);
-            return _Intent;
+            SDD.WriteLine("Rescanning");
+
+            if (IsRegistered)
+            {
+                CM.UnregisterNetworkCallback(NetCB);
+                IsRegistered = false;
+            }
+
+            if (!IsRegistered)
+            {
+                CM.RegisterNetworkCallback
+                (
+                    new NetworkRequest.Builder().AddTransportType(TransportType.Wifi).Build(),
+                    NetCB
+                );
+                IsRegistered = true;
+            }
         }
 
+        //is called to collect data
         public List<WifiInfoItem> GetData()
         {
             //get data
@@ -129,16 +110,11 @@ namespace WifiScanner.DataModels
             return new List<WifiInfoItem>();
         }
 
-        //public override IBinder? OnBind(Intent? intent)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
+        //collects the data
         public bool CB()
         {
             if (WM.ScanResults.Count > 0)
             {
-                //System.Diagnostics.Debug.WriteLine($"Results: {WM.ScanResults.FirstOrDefault().Ssid}");
                 foreach (var N in WM.ScanResults)
                 {SDD.WriteLine($"{N.Ssid} [{N.Level}]");}
 
@@ -149,40 +125,12 @@ namespace WifiScanner.DataModels
         }
 
         public override IBinder? OnBind(Intent? intent)
-        {
-            throw new NotImplementedException();
-        }
-
-        public class BRec : BroadcastReceiver
-        {
-            public override void OnReceive(Context? context, Intent? intent)
-            {
-                if (intent.Action == WifiManager.ScanResultsAvailableAction)
-                {
-                    System.Diagnostics.Debug.WriteLine($"BRec: {WM.ScanResults.First().Ssid}");
-                }
-            }
-        }
+        {throw new NotImplementedException();}
     }
 
-    public class SRC : WifiManager.ScanResultsCallback
-    {
-        public Func<bool> CallBack { get; set; }
-
-        public SRC(Func<bool> _CallBack)
-        {CallBack = _CallBack;}
-
-        public override void OnScanResultsAvailable()
-        {
-            //System.Diagnostics.Debug.WriteLine("Results available------------------");
-
-            CallBack();
-        }
-    }
     public class NC : ConnectivityManager.NetworkCallback
     {
         public Func<bool> CallBack { get; set; }
-        public int Flags { get; set; }
 
         public void Initialise(Func<bool> _CallBack)
         {CallBack = _CallBack;}
@@ -190,15 +138,8 @@ namespace WifiScanner.DataModels
         public NC()
         { }
 
-        public NC(int _Flags)
-        {Flags = _Flags;}
-
         public override void OnAvailable(Network network)
-        {
-            System.Diagnostics.Debug.WriteLine(network.GetByName);
-
-            CallBack();
-        }
+        {CallBack();}
     }
 
 }
