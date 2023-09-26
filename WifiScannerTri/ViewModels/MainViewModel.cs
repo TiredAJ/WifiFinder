@@ -11,7 +11,7 @@ namespace WifiScannerTri.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    public WifiInfoViewModel WifiInfoList { get; private set; } = new WifiInfoViewModel();
+    public WifiInfoViewModel WifiInfoList { get; private set; }
     public string TempTest => "Hello there";
     //public static IWS? IWScanner;
 
@@ -52,9 +52,6 @@ public class MainViewModel : ViewModelBase
         if (Service == null)
         { throw new System.Exception("Service was null!"); }
 
-        //WifiInfoList.WifiInfoItems = new WifiInfoViewModel(Service.GetItems()).WifiInfoItems;
-        WifiInfoList.WifiInfoItems = new ObservableCollection<WifiInfoItem>(Service.GetItems());
-
-        SDD.WriteLine(WifiInfoList.WifiInfoItems.Count);
+        WifiInfoList = new WifiInfoViewModel(Service.GetItems());
     }
 }

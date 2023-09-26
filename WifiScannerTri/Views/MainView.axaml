@@ -7,9 +7,12 @@
              x:Class="WifiScannerTri.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
-	  <vm:MainViewModel/>
+    <vm:MainViewModel />
   </Design.DataContext>
 
-	<DataGrid x:Name="DGRD_Wifis" Margin="10" AutoGenerateColumns="True" ItemsSource="{Binding WifiInfoList.WifiInfoItems}" IsReadOnly="True" GridLinesVisibility="All">
+	<DataGrid x:Name="DGRD_Wifis" Margin="10" AutoGenerateColumns="True" ItemsSource="{Binding WifiInfoList}" IsReadOnly="True" GridLinesVisibility="All">
+		<DataGrid.Columns>
+			<DataGridTextColumn Header="BSSID"></DataGridTextColumn>
+		</DataGrid.Columns>
 	</DataGrid>
 </UserControl>
