@@ -42,6 +42,8 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         if (TempPerms.Count > 0)
         {RequestPermissions(TempPerms.ToArray() ,2);}
+        else if (CTX != null)
+        {WifiScannerTri.App.IWScanner = new WifiScannerLib.AndroidWS(CTX);}
 
 #endif
         return base.CustomizeAppBuilder(builder)

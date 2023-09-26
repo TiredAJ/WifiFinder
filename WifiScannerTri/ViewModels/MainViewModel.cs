@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using WifiScannerLib;
 using WifiScannerTri.Services;
+using SDD = System.Diagnostics.Debug;
 
 namespace WifiScannerTri.ViewModels;
 
@@ -18,10 +19,14 @@ public class MainViewModel : ViewModelBase
     private WifiInfoService Service;
 
     public MainViewModel()
-    { }
+    {
+        SDD.WriteLine("**** Called empty constructor ****");
+    }
 
     public MainViewModel(IWS? _IWScanner)
     {
+        SDD.WriteLine("**** Called from main constructor ****");
+
         if (_IWScanner != null)
         {
             Service = new WifiInfoService(_IWScanner);

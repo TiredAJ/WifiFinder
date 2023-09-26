@@ -7,10 +7,12 @@
              x:Class="WifiScannerTri.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
 
-	<TextBlock Text="{Binding TempTest}" Margin="10"/>
+	<DataGrid x:Name="DGRD_Wifis" Margin="10" AutoGenerateColumns="True" ItemsSource="{Binding WifiInfoList}" IsReadOnly="True" GridLinesVisibility="All">
+		<DataGrid.Columns>
+			<DataGridTextColumn Header="BSSID"></DataGridTextColumn>
+		</DataGrid.Columns>
+	</DataGrid>
 </UserControl>
