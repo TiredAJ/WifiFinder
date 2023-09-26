@@ -11,6 +11,7 @@ namespace WifiScannerTri.ViewModels;
 public class MainViewModel : ViewModelBase
 {
     public WifiInfoViewModel WifiInfoList { get; private set; }
+    public string TempTest => "Hello there";
     //public static IWS? IWScanner;
 
     private DispatcherTimer DT_Timer = new DispatcherTimer();
