@@ -41,6 +41,6 @@ namespace WifiScannerTri.Services
 
         private List<WifiInfoItem> _WifiInfoItems = new List<WifiInfoItem>();
 
-        public IEnumerable<WifiInfoItem> GetItems() => WScanner.GetData();
+        public List<WifiInfoItem> GetItems() => WScanner.GetData();
     }    
 }
