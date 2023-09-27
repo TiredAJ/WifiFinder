@@ -2,15 +2,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:WifiScannerPedwar.ViewModels"
+             xmlns:vm="using:WifiScannerPedwar.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="WifiScannerPedwar.Views.MainView"
-             x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
+             x:DataType="vm:WifiViewModel">
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<StackPanel>
+		<DataGrid Margin="15" ItemsSource="{Binding Items}" AutoGenerateColumns="True"
+				  GridLinesVisibility="All" BorderThickness="2">
+			<!--<DataGrid.Columns>
+				<DataGridTextColumn Header="BSSID" Binding="{Binding BSSID}"/>
+				<DataGridTextColumn Header="SSID" Binding="{Binding SSID}"/>
+				<DataGridTextColumn Header="RSSI" Binding="{Binding RSSI}"/>
+				<DataGridTextColumn Header="Capabilities" Binding="{Binding Capabilities}"/>
+				<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}"/>
+			</DataGrid.Columns>-->
+		</DataGrid>
+
+		<!--<DataGrid x:Name="DRGD_Data" Margin="15" GridLinesVisibility="All" BorderThickness="2">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="BSSID" ="{Binding BSSID}"/>
+				<DataGridTextColumn Header="SSID" Binding="{Binding SSID}"/>
+				<DataGridTextColumn Header="RSSI" Binding="{Binding RSSI}"/>
+				<DataGridTextColumn Header="Capabilities" Binding="{Binding Capabilities}"/>
+				<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}"/>
+			</DataGrid.Columns>
+		</DataGrid>-->
+		
+	    <!--<ItemsControl ItemsSource="{Binding Items}" >
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Margin="5" Text="{Binding BSSID}"/>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+	    </ItemsControl>-->
+		<!--<TextBlock Text="{Binding Temp.BSSID} "></TextBlock>-->
+	</StackPanel>	
 </UserControl>

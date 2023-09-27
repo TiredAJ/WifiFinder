@@ -9,9 +9,9 @@ namespace WifiScannerLib
     // All the code in this file is included in all platforms.
 
     public interface IWS
-    {
-        public List<WifiInfoItem> GetData();
-    }
+    {public List<WifiInfoItem> GetData();}
+
+
     public class WifiInfoItem
     {
         #region Android
