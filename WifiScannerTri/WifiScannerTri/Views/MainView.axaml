@@ -5,14 +5,16 @@
              xmlns:vm="clr-namespace:WifiScannerTri.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="WifiScannerTri.Views.MainView"
-             x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <vm:MainViewModel />
-  </Design.DataContext>
+             x:DataType="vm:WifiInfoViewModel"
+			 >
 
-	<DataGrid x:Name="DGRD_Wifis" Margin="10" AutoGenerateColumns="True" ItemsSource="{Binding WifiInfoList}" IsReadOnly="True" GridLinesVisibility="All">
-		<DataGrid.Columns>
-			<DataGridTextColumn Header="BSSID"></DataGridTextColumn>
-		</DataGrid.Columns>
-	</DataGrid>
+	<StackPanel>
+		<DataGrid x:Name="DGRD_Wifis" Margin="10" AutoGenerateColumns="True" 
+				  ItemsSource="{Binding WifiInfoItems}" IsReadOnly="True" GridLinesVisibility="All"
+				  IsVisible="True">
+		</DataGrid>
+		<TextBlock Text="{Binding TempTest}" IsVisible="True"> hello</TextBlock>
+		
+	</StackPanel>
+	
 </UserControl>

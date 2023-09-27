@@ -11,8 +11,7 @@ namespace WifiScannerTri.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    public WifiInfoViewModel WifiInfoList { get; private set; }
-    public string TempTest => "Hello there";
+    public WifiInfoViewModel WifiInfoList { get; private set; }    
     //public static IWS? IWScanner;
 
     private DispatcherTimer DT_Timer = new DispatcherTimer();
@@ -31,11 +30,11 @@ public class MainViewModel : ViewModelBase
         {
             Service = new WifiInfoService(_IWScanner);
 
-            UpdateInfoList();
+            //UpdateInfoList();
 
             DT_Timer.Interval = new System.TimeSpan(0, 0, 10);
             DT_Timer.Tick += Tmr_Updater_Tick;
-            DT_Timer.Start();
+            //DT_Timer.Start();
         }
         //else
         //{throw new System.Exception("IWScanner was null!");}
@@ -43,7 +42,7 @@ public class MainViewModel : ViewModelBase
 
     private void Tmr_Updater_Tick(object? sender, System.EventArgs e)
     {
-        UpdateInfoList();
+        //UpdateInfoList();
         Debug.WriteLine("Ticked");
     }
 
