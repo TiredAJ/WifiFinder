@@ -15,6 +15,9 @@ using SDD = System.Diagnostics.Debug;
 
 namespace WifiScannerPedwar.Android;
 
+//may be kinda cheaty, but here is where we grab app context and do shit
+//that requires android "activity" shenangians
+
 [Activity(
     Label = "WifiScannerPedwar.Android",
     Theme = "@style/MyTheme.NoActionBar",
@@ -31,7 +34,8 @@ public class MainActivity : AvaloniaMainActivity<App>
         CTX = this.ApplicationContext;
 
 #if ANDROID23_0_OR_GREATER
-
+        //goes through and checks what permissions we have vs what we need
+        //what we need but don't have is added to a list
         #region Permission Checks
         if (CTX.CheckSelfPermission(Manifest.Permission.AccessWifiState) == Permission.Denied)
         { TempPerms.Add(Manifest.Permission.AccessWifiState); }
@@ -43,23 +47,30 @@ public class MainActivity : AvaloniaMainActivity<App>
         { TempPerms.Add(Manifest.Permission.ChangeWifiState); }
         #endregion
 
+        //...that list is then sent to the system to prompt the user for perms
         if (TempPerms.Count > 0)
         { RequestPermissions(TempPerms.ToArray(), 2); }
         else if (CTX != null)
-        {WifiScannerPedwar.App.IWScanner = new WifiScannerLib.AndroidWS(CTX);}
+        {
+            //if we already have perms, it goes straight to setting the IWS to android
+            WifiScannerPedwar.App.IWScanner = new WifiScannerLib.AndroidWS(CTX);
+        }
 
 #endif
+        //default boilerplate stuff idk
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseReactiveUI();
     }
 
+    //this is called when the result of the permission request is received
     public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
     {
-        SDD.WriteLine("**** Permissions Results are in ****");
+        //SDD.WriteLine("**** Permissions Results are in ****");
 
         base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        //checks if context isn't null, then sets IWS stuff to android version
         if (CTX != null)
         {WifiScannerPedwar.App.IWScanner = new WifiScannerLib.AndroidWS(CTX);}
         else

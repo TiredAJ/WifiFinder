@@ -10,6 +10,7 @@ namespace WifiScannerPedwar;
 
 public partial class App : Application
 {
+    //global IWS
     public static IWS? IWScanner;
 
     public override void Initialize()
@@ -22,14 +23,14 @@ public partial class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
-            {
+            {//here...
                 DataContext = new MainViewModel(IWScanner)
             };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
             singleViewPlatform.MainView = new MainView
-            {
+            {//...and here, IWS is passed into the view model
                 DataContext = new MainViewModel(IWScanner)
             };
         }

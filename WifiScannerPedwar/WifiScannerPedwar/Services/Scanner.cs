@@ -14,28 +14,20 @@ using Avalonia.Threading;
 
 namespace WifiScannerPedwar.Services
 {
+    //effectively a wrapper?
     public class WifiService
     {
         public IWS? WScanner;
-
-        static List<WifiInfoItem> Wifis = new List<WifiInfoItem>();
 
         public WifiService(IWS? _WScanner)
         {WScanner = _WScanner;}
 
         public IEnumerable<WifiInfoItem> GetItems()
         {
-            //Wifis.Add
-            //(new WifiInfoItem()
-            //{
-            //    BSSID = new Random((int)DateTime.Now.Ticks).Next(10000, 50000).ToString(),
-            //    SSID = "Ur mom",
-            //    RSSI = new Random((int)DateTime.Now.Ticks).Next(-40, -30).ToString(),
-            //    LastUpdated = new TimeSpan(0, 0, 2),
-            //    Capabilities = "WiFi 6e"
-            //});
-
-            return WScanner.GetData();
+            if (WScanner != null)
+            {return WScanner.GetData();}
+            else
+            {return Enumerable.Empty<WifiInfoItem>();}
         }        
     }
 }

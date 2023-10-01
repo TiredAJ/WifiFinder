@@ -13,16 +13,8 @@ public partial class MainView : UserControl
     {
         InitializeComponent();
 
-        //DRGD_Data.ItemsSource = new List<AvWifiInfoItem>() 
-        //{
-        //    new AvWifiInfoItem() {BSSID = "ac76b623b", RSSI = -60, SSID = "Ur Dad"}
-        //};
-
+        //sets the default sorting (Rssi, best > worst signal)
         Dispatcher.UIThread.InvokeAsync(() =>
         this.FindControl<DataGrid>("DGRD_APData").Columns[2].Sort());
-
-
-        //DGRD_APData.Columns[2].Sort(ListSortDirection.Descending);
-        //DGRD_APData.UpdateLayout();
     }
 }

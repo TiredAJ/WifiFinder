@@ -11,16 +11,18 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace WifiScannerLib
 {
-    // All the code in this file is included in all platforms.
-
+    //so how this works (idk if it's how it /should/ work, but oh well) is this is
+    //the interface for retreiving data, implemented in classes target at Android & IOS
+    //so they just work fine with whatever platform the app is currently on
     public interface IWS
     {
         public IEnumerable<WifiInfoItem> GetData();
     }
 
-
+    //this is what the data is
     public class WifiInfoItem : IEquatable<WifiInfoItem>
     {
+        //Android-specific shenanigans
         #region Android
 #if ANDROID
         public WifiInfoItem(ScanResult _SR)
@@ -43,6 +45,7 @@ namespace WifiScannerLib
 #endif
         #endregion
 
+        //IOS-specific shenanigans
         #region IOS
 #if IOS
         public WifiInfoItem(NetworkExtension.NEHotspotHelperResult NEHHR)
@@ -52,8 +55,7 @@ namespace WifiScannerLib
         #endregion
 
         public WifiInfoItem()
-        {
-        }
+        {}
 
         public string BSSID { get; set; } = string.Empty;
         public string SSID { get; set; } = string.Empty;
