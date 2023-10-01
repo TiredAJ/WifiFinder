@@ -10,25 +10,29 @@ using SDD = System.Diagnostics.Debug;
 
 using WifiScannerLib;
 using WifiScannerPedwar.Models;
+using Avalonia.Threading;
 
 namespace WifiScannerPedwar.Services
 {
     public class WifiService
     {
         static List<AvWifiInfoItem> Wifis = new List<AvWifiInfoItem>();
-        
-        private static AutoResetEvent Resetter = new AutoResetEvent(false);
 
-        System.Threading.Timer Amserwr = new Timer(Tick, Resetter, 0, 1000);
+        private event EventHandler TickCB;
 
-        public static void Start()
-        { 
-        
+        Avalonia.Threading.DispatcherTimer Amserwr;
+
+        public WifiService()
+        {
+            TickCB += Tick;
+
+            Amserwr = new Avalonia.Threading.DispatcherTimer
+            (new TimeSpan(0, 0, 2), DispatcherPriority.Background, TickCB);
+
+            Amserwr.Start();
         }
 
-        public IEnumerable<AvWifiInfoItem> GetItems() => Wifis;
-
-        private static void Tick(object? state)
+        private void Tick(object? Sender, EventArgs e)
         {
             Wifis.Add
             (new AvWifiInfoItem()
@@ -42,5 +46,7 @@ namespace WifiScannerPedwar.Services
 
             SDD.WriteLine($"***** Ticked! {Wifis.Count()} *****");
         }
+
+        public IEnumerable<AvWifiInfoItem> GetItems() => Wifis;
     }
 }

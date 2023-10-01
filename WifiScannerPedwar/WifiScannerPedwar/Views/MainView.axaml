@@ -5,11 +5,13 @@
              xmlns:vm="using:WifiScannerPedwar.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="WifiScannerPedwar.Views.MainView"
-             x:DataType="vm:WifiViewModel">
+             x:DataType="vm:MainViewModel">
 
-	<StackPanel>
-		<DataGrid Margin="15" ItemsSource="{Binding Items}" AutoGenerateColumns="True"
-				  GridLinesVisibility="All" BorderThickness="2">
+	<StackPanel Orientation="Horizontal" Background="AliceBlue">
+
+		<DataGrid x:Name="DGRD_APData" Margin="15" ItemsSource="{Binding WifiList.Items, Mode=OneWay}" AutoGenerateColumns="True"
+				  GridLinesVisibility="All" BorderThickness="2" Background="Gray"
+				  VerticalScrollBarVisibility="Visible">
 			<!--<DataGrid.Columns>
 				<DataGridTextColumn Header="BSSID" Binding="{Binding BSSID}"/>
 				<DataGridTextColumn Header="SSID" Binding="{Binding SSID}"/>
@@ -28,8 +30,8 @@
 				<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}"/>
 			</DataGrid.Columns>
 		</DataGrid>-->
-		
-	    <!--<ItemsControl ItemsSource="{Binding Items}" >
+
+		<!--<ItemsControl ItemsSource="{Binding Items}" >
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<TextBlock Margin="5" Text="{Binding BSSID}"/>
@@ -37,5 +39,6 @@
 			</ItemsControl.ItemTemplate>
 	    </ItemsControl>-->
 		<!--<TextBlock Text="{Binding Temp.BSSID} "></TextBlock>-->
-	</StackPanel>	
+		<!--<TextBlock>Hello</TextBlock>-->
+	</StackPanel>
 </UserControl>

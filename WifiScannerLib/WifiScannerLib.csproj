@@ -17,10 +17,4 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">
-	  <PackageReference Include="Xamarin.NetworkManager.iOS">
-	    <Version>1.0.0</Version>
-	  </PackageReference>
-	</ItemGroup>
-
 </Project>
