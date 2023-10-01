@@ -7,6 +7,6 @@ using WifiScannerLib;
 
 namespace WifiScannerPedwar.Models
 {
-    public class AvWifiInfoItem : WifiInfoItem
-    {}
+    //public class AvWifiInfoItem : WifiInfoItem
+    //{}
 }

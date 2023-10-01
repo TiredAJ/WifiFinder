@@ -16,8 +16,10 @@
 					<DataGridTextColumn Header="BSSID" Binding="{Binding BSSID}"/>
 					<DataGridTextColumn Header="SSID" Binding="{Binding SSID}"/>
 					<DataGridTextColumn Header="RSSI" Binding="{Binding RSSI}"/>
+					<!--
 					<DataGridTextColumn Header="Capabilities" Binding="{Binding Capabilities}"/>
 					<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}"/>
+					-->
 				</DataGrid.Columns>
 			</DataGrid>		
 	</DockPanel>

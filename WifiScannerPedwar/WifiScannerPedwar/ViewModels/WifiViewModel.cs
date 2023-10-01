@@ -15,23 +15,27 @@ namespace WifiScannerPedwar.ViewModels
 {
     public class WifiViewModel : ViewModelBase
     {
-        public WifiViewModel(IEnumerable<AvWifiInfoItem> _Items)
+        public WifiViewModel(IEnumerable<WifiInfoItem> _Items)
         {
             //SDD.WriteLine(_Items.Count());
 
-            Items = new ObservableCollection<AvWifiInfoItem>(_Items);
+            Items = new ObservableCollection<WifiInfoItem>(_Items);
         }
 
-        public void AddItems(IEnumerable<AvWifiInfoItem> _Wifis)
+        public void AddItems(IEnumerable<WifiInfoItem> _Wifis)
         {
             int Index;
 
             //Items.Clear();
 
-            //foreach (var W in _Wifis)
-            //{Items.Add(W);}
+            //SDD.WriteLine("wtf is going on?");
 
-            foreach (var W in _Wifis)
+            //Items.AddOrInsertRange(_Wifis, 0);
+
+            //foreach (var W in _Wifis)
+            //{ Items.Add(W.Clone()); }
+
+            foreach (WifiInfoItem W in _Wifis.ToList())
             {
                 Index = FindIndex(W);
 
@@ -42,11 +46,11 @@ namespace WifiScannerPedwar.ViewModels
             }
         }
 
-        private int FindIndex(AvWifiInfoItem _WII)
+        private int FindIndex(WifiInfoItem _WII)
         {
             for (int i = 0; i < Items.Count(); i++)
             {
-                if (Items[i] == _WII)
+                if (Items[i].BSSID == _WII.BSSID)
                 {return i;}
             }
 
@@ -54,6 +58,6 @@ namespace WifiScannerPedwar.ViewModels
         }
 
         //"list items"
-        public ObservableCollection<AvWifiInfoItem> Items { get; private set;}
+        public ObservableCollection<WifiInfoItem> Items { get; private set;}
     }
 }

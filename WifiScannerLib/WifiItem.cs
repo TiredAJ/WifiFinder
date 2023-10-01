@@ -1,4 +1,6 @@
-﻿#if ANDROID
+﻿using SDD = System.Diagnostics.Debug;
+
+#if ANDROID
 using Android.Net.Wifi;
 #elif IOS
 using NetworkExtension;
@@ -12,7 +14,9 @@ namespace WifiScannerLib
     // All the code in this file is included in all platforms.
 
     public interface IWS
-    {public List<WifiInfoItem> GetData();}
+    {
+        public IEnumerable<WifiInfoItem> GetData();
+    }
 
 
     public class WifiInfoItem : IEquatable<WifiInfoItem>
@@ -27,8 +31,14 @@ namespace WifiScannerLib
             SSID = _SR.Ssid;
 #endif
             BSSID = _SR.Bssid;
+
             RSSI = _SR.Level;
             LastUpdated = TimeSpan.FromMicroseconds(_SR.Timestamp);
+
+            if (SSID == "")
+	        {SSID = "*Hidden*";}
+            else
+	        {SSID = SSID.Trim('\"', ' ');}
         }
 #endif
         #endregion
@@ -42,13 +52,17 @@ namespace WifiScannerLib
         #endregion
 
         public WifiInfoItem()
-        { }
+        {
+        }
 
         public string BSSID { get; set; } = string.Empty;
         public string SSID { get; set; } = string.Empty;
         public float RSSI { get; set; } = -101;
         public string Capabilities { get; set; } = string.Empty;
         public TimeSpan LastUpdated { get; set; } = TimeSpan.Zero;
+
+        public WifiInfoItem Clone()
+        {return this.MemberwiseClone() as WifiInfoItem;}
 
         public bool Equals(WifiInfoItem A, WifiInfoItem B)
         {

@@ -28,17 +28,6 @@ namespace WifiScannerTri.Services
         //public void StopTimer() 
         //{ DT.Stop();}
 
-        private void DT_Tick(object? sender, EventArgs e)
-        {
-            if (WScanner != null)
-            {_WifiInfoItems = WScanner.GetData();}
-            else
-            {
-                //DT.Stop();
-                throw new Exception("WScanner was null!");
-            }
-        }
-
         private List<WifiInfoItem> _WifiInfoItems = new List<WifiInfoItem>();
 
         public IEnumerable<WifiInfoItem> GetItems() => WScanner.GetData();

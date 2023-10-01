@@ -16,15 +16,17 @@ namespace WifiScannerPedwar.Services
 {
     public class WifiService
     {
-        static List<AvWifiInfoItem> Wifis = new List<AvWifiInfoItem>();
+        public IWS? WScanner;
 
-        public WifiService()
-        {}
+        static List<WifiInfoItem> Wifis = new List<WifiInfoItem>();
 
-        public IEnumerable<AvWifiInfoItem> GetItems()
+        public WifiService(IWS? _WScanner)
+        {WScanner = _WScanner;}
+
+        public IEnumerable<WifiInfoItem> GetItems()
         {
             Wifis.Add
-            (new AvWifiInfoItem()
+            (new WifiInfoItem()
             {
                 BSSID = new Random((int)DateTime.Now.Ticks).Next(10000, 50000).ToString(),
                 SSID = "Ur mom",
@@ -33,7 +35,7 @@ namespace WifiScannerPedwar.Services
                 Capabilities = "WiFi 6e"
             });
 
-            return Wifis;
+            return WScanner.GetData();
         }        
     }
 }

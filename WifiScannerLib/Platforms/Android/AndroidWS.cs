@@ -26,7 +26,7 @@ namespace WifiScannerLib
         {
             CTX = _CTX;
 
-            SDD.WriteLine("**** Constructor called ****");
+            //SDD.WriteLine("**** Constructor called ****");
 
             Initialise();
         }
@@ -36,7 +36,7 @@ namespace WifiScannerLib
 
         public override void OnCreate()
         {
-            SDD.WriteLine("**** On Create Called ****");
+            //SDD.WriteLine("**** On Create Called ****");
 
             //Context temp = Android.App.Application.Context;
 
@@ -45,7 +45,7 @@ namespace WifiScannerLib
 
         private void Initialise()
         {
-            SDD.WriteLine("**** Initialise called ****");
+            //SDD.WriteLine("**** Initialise called ****");
 
             if (CTX == null)
             { throw new NullReferenceException("CTX was null!?"); }
@@ -69,9 +69,9 @@ namespace WifiScannerLib
         }
 
         //is called to collect data
-        public List<WifiInfoItem> GetData()
+        public IEnumerable<WifiInfoItem> GetData()
         {
-            SDD.WriteLine("**** Get Data called ****");
+            //SDD.WriteLine("**** Get Data called ****");
 
             if (CM == null)
             {throw new Exception("CM was null!");}
@@ -92,7 +92,7 @@ namespace WifiScannerLib
                 IsRegistered = true;
             }
 
-            SDD.WriteLine($"***** Scan results {ScanData.Count} *****");
+            //SDD.WriteLine($"***** Scan results {ScanData.Count} *****");
 
             return ScanData;
         }
