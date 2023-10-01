@@ -47,7 +47,8 @@ public class MainActivity : AvaloniaMainActivity<App>
         { RequestPermissions(TempPerms.ToArray(), 2); }
         else if (CTX != null)
         {
-            //WifiScannerTri.App.IWScanner = new WifiScannerLib.AndroidWS(CTX); 
+            
+            //.App.IWScanner = new WifiScannerLib.AndroidWS(CTX); 
         }
 
 #endif

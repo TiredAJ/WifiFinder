@@ -8,6 +8,8 @@ using SDD = System.Diagnostics.Debug;
 
 using WifiScannerLib;
 using WifiScannerPedwar.Models;
+using DynamicData;
+using Avalonia.Controls;
 
 namespace WifiScannerPedwar.ViewModels
 {
@@ -18,19 +20,40 @@ namespace WifiScannerPedwar.ViewModels
             //SDD.WriteLine(_Items.Count());
 
             Items = new ObservableCollection<AvWifiInfoItem>(_Items);
+        }
 
-            Items.Add
-            (new AvWifiInfoItem()
+        public void AddItems(IEnumerable<AvWifiInfoItem> _Wifis)
+        {
+            int Index;
+
+            //Items.Clear();
+
+            //foreach (var W in _Wifis)
+            //{Items.Add(W);}
+
+            foreach (var W in _Wifis)
             {
-                BSSID = "bc23ba3a2343",
-                SSID = "Ur mom",
-                RSSI = new Random((int)DateTime.Now.Ticks).Next(-40, -30),
-                LastUpdated = new TimeSpan(0, 0, 2),
-                Capabilities = "WiFi 6e"
-            });
+                Index = FindIndex(W);
+
+                if (Index != -1)
+                { Items[Index] = W; }
+                else
+                { Items.Add(W); }
+            }
+        }
+
+        private int FindIndex(AvWifiInfoItem _WII)
+        {
+            for (int i = 0; i < Items.Count(); i++)
+            {
+                if (Items[i] == _WII)
+                {return i;}
+            }
+
+            return -1;
         }
 
         //"list items"
-        public ObservableCollection<AvWifiInfoItem> Items { get; }
+        public ObservableCollection<AvWifiInfoItem> Items { get; private set;}
     }
 }

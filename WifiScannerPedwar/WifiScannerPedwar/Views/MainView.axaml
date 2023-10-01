@@ -6,39 +6,19 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="WifiScannerPedwar.Views.MainView"
              x:DataType="vm:MainViewModel">
-
-	<StackPanel Orientation="Horizontal" Background="AliceBlue">
-
-		<DataGrid x:Name="DGRD_APData" Margin="15" ItemsSource="{Binding WifiList.Items, Mode=OneWay}" AutoGenerateColumns="True"
-				  GridLinesVisibility="All" BorderThickness="2" Background="Gray"
-				  VerticalScrollBarVisibility="Visible">
-			<!--<DataGrid.Columns>
-				<DataGridTextColumn Header="BSSID" Binding="{Binding BSSID}"/>
-				<DataGridTextColumn Header="SSID" Binding="{Binding SSID}"/>
-				<DataGridTextColumn Header="RSSI" Binding="{Binding RSSI}"/>
-				<DataGridTextColumn Header="Capabilities" Binding="{Binding Capabilities}"/>
-				<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}"/>
-			</DataGrid.Columns>-->
-		</DataGrid>
-
-		<!--<DataGrid x:Name="DRGD_Data" Margin="15" GridLinesVisibility="All" BorderThickness="2">
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="BSSID" ="{Binding BSSID}"/>
-				<DataGridTextColumn Header="SSID" Binding="{Binding SSID}"/>
-				<DataGridTextColumn Header="RSSI" Binding="{Binding RSSI}"/>
-				<DataGridTextColumn Header="Capabilities" Binding="{Binding Capabilities}"/>
-				<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}"/>
-			</DataGrid.Columns>
-		</DataGrid>-->
-
-		<!--<ItemsControl ItemsSource="{Binding Items}" >
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Margin="5" Text="{Binding BSSID}"/>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-	    </ItemsControl>-->
-		<!--<TextBlock Text="{Binding Temp.BSSID} "></TextBlock>-->
-		<!--<TextBlock>Hello</TextBlock>-->
-	</StackPanel>
+	<DockPanel>
+			<DataGrid x:Name="DGRD_APData" Margin="15" ItemsSource="{Binding WifiList.Items, Mode=OneWay}"
+					  AutoGenerateColumns="False" GridLinesVisibility="All" BorderThickness="2"
+					  IsReadOnly="True" VerticalScrollBarVisibility="Visible" 
+					  HorizontalScrollBarVisibility="Visible"
+					  DockPanel.Dock="Top">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="BSSID" Binding="{Binding BSSID}"/>
+					<DataGridTextColumn Header="SSID" Binding="{Binding SSID}"/>
+					<DataGridTextColumn Header="RSSI" Binding="{Binding RSSI}"/>
+					<DataGridTextColumn Header="Capabilities" Binding="{Binding Capabilities}"/>
+					<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}"/>
+				</DataGrid.Columns>
+			</DataGrid>		
+	</DockPanel>
 </UserControl>

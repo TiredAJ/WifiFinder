@@ -4,11 +4,14 @@ using Avalonia.Markup.Xaml;
 
 using WifiScannerPedwar.ViewModels;
 using WifiScannerPedwar.Views;
+using WifiScannerLib;
 
 namespace WifiScannerPedwar;
 
 public partial class App : Application
 {
+    public static IWS? IWScanner;
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);

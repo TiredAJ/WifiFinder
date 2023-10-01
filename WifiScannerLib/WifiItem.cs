@@ -4,6 +4,9 @@ using Android.Net.Wifi;
 using NetworkExtension;
 #endif
 
+using Microsoft.Maui.Layouts;
+using System.Diagnostics.CodeAnalysis;
+
 namespace WifiScannerLib
 {
     // All the code in this file is included in all platforms.
@@ -12,7 +15,7 @@ namespace WifiScannerLib
     {public List<WifiInfoItem> GetData();}
 
 
-    public class WifiInfoItem
+    public class WifiInfoItem : IEquatable<WifiInfoItem>
     {
         #region Android
 #if ANDROID
@@ -46,5 +49,21 @@ namespace WifiScannerLib
         public float RSSI { get; set; } = -101;
         public string Capabilities { get; set; } = string.Empty;
         public TimeSpan LastUpdated { get; set; } = TimeSpan.Zero;
+
+        public bool Equals(WifiInfoItem A, WifiInfoItem B)
+        {
+            if (A.BSSID == B.BSSID)
+            {return true;}
+            else
+            {return false;}
+        }
+
+        public bool Equals(WifiInfoItem B)
+        {
+            if (this.BSSID == B.BSSID)
+            {return true;}
+            else
+            {return false;}
+        }
     }
 }

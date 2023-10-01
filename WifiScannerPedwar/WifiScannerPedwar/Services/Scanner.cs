@@ -18,35 +18,22 @@ namespace WifiScannerPedwar.Services
     {
         static List<AvWifiInfoItem> Wifis = new List<AvWifiInfoItem>();
 
-        private event EventHandler TickCB;
-
-        Avalonia.Threading.DispatcherTimer Amserwr;
-
         public WifiService()
-        {
-            TickCB += Tick;
+        {}
 
-            Amserwr = new Avalonia.Threading.DispatcherTimer
-            (new TimeSpan(0, 0, 2), DispatcherPriority.Background, TickCB);
-
-            Amserwr.Start();
-        }
-
-        private void Tick(object? Sender, EventArgs e)
+        public IEnumerable<AvWifiInfoItem> GetItems()
         {
             Wifis.Add
             (new AvWifiInfoItem()
             {
-                BSSID = "bc23ba3a2343",
+                BSSID = new Random((int)DateTime.Now.Ticks).Next(10000, 50000).ToString(),
                 SSID = "Ur mom",
                 RSSI = new Random((int)DateTime.Now.Ticks).Next(-40, -30),
                 LastUpdated = new TimeSpan(0, 0, 2),
                 Capabilities = "WiFi 6e"
             });
 
-            SDD.WriteLine($"***** Ticked! {Wifis.Count()} *****");
-        }
-
-        public IEnumerable<AvWifiInfoItem> GetItems() => Wifis;
+            return Wifis;
+        }        
     }
 }
