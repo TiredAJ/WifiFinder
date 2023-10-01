@@ -32,7 +32,7 @@ namespace WifiScannerLib
 #endif
             BSSID = _SR.Bssid;
 
-            RSSI = _SR.Level;
+            _RSSI = _SR.Level;
             LastUpdated = TimeSpan.FromMicroseconds(_SR.Timestamp);
 
             if (SSID == "")
@@ -57,7 +57,12 @@ namespace WifiScannerLib
 
         public string BSSID { get; set; } = string.Empty;
         public string SSID { get; set; } = string.Empty;
-        public float RSSI { get; set; } = -101;
+        private float _RSSI = -101;
+        public string RSSI
+        {
+            get => _RSSI.ToString("#dbm");
+            set => _RSSI = float.Parse(value); 
+        }
         public string Capabilities { get; set; } = string.Empty;
         public TimeSpan LastUpdated { get; set; } = TimeSpan.Zero;
 

@@ -25,15 +25,15 @@ namespace WifiScannerPedwar.Services
 
         public IEnumerable<WifiInfoItem> GetItems()
         {
-            Wifis.Add
-            (new WifiInfoItem()
-            {
-                BSSID = new Random((int)DateTime.Now.Ticks).Next(10000, 50000).ToString(),
-                SSID = "Ur mom",
-                RSSI = new Random((int)DateTime.Now.Ticks).Next(-40, -30),
-                LastUpdated = new TimeSpan(0, 0, 2),
-                Capabilities = "WiFi 6e"
-            });
+            //Wifis.Add
+            //(new WifiInfoItem()
+            //{
+            //    BSSID = new Random((int)DateTime.Now.Ticks).Next(10000, 50000).ToString(),
+            //    SSID = "Ur mom",
+            //    RSSI = new Random((int)DateTime.Now.Ticks).Next(-40, -30).ToString(),
+            //    LastUpdated = new TimeSpan(0, 0, 2),
+            //    Capabilities = "WiFi 6e"
+            //});
 
             return WScanner.GetData();
         }        

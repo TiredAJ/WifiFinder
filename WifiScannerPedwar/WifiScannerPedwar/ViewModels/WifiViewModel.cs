@@ -59,5 +59,7 @@ namespace WifiScannerPedwar.ViewModels
 
         //"list items"
         public ObservableCollection<WifiInfoItem> Items { get; private set;}
+
+        public int Update { get; set; }
     }
 }

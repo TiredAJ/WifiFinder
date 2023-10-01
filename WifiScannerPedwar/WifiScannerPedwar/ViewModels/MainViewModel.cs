@@ -23,7 +23,7 @@ public class MainViewModel : ViewModelBase
         
             var Data = WS.GetItems();
 
-            Amserwr.Interval = new System.TimeSpan(0, 0, 3);
+            Amserwr.Interval = new System.TimeSpan(0, 0, 5);
             Amserwr.Tick += Tick;
             Amserwr.Start();
 
@@ -32,7 +32,7 @@ public class MainViewModel : ViewModelBase
 
             WifiList = new WifiViewModel(Data);
 
-            //SDD.WriteLine("Item's gought");
+            SDD.WriteLine("Item's gought");
         }
         else
         {/*something to do while waiting for perms?*/}
