@@ -41,6 +41,11 @@ namespace WifiScannerLib
 	        {SSID = "*Hidden*";}
             else
 	        {SSID = SSID.Trim('\"', ' ');}
+
+
+            //https://developer.android.com/reference/android/net/wifi/ScanResult
+            //find mid between min and mad freq
+            //PrimaryFrequency = (_SR.cent
         }
 #endif
         #endregion
@@ -67,6 +72,8 @@ namespace WifiScannerLib
         }
         public string Capabilities { get; set; } = string.Empty;
         public TimeSpan LastUpdated { get; set; } = TimeSpan.Zero;
+		public decimal Distance {get; set;} = 0m;
+        private decimal PrimaryFrequency { get; set; } = 0m;
 
         public WifiInfoItem Clone()
         {return this.MemberwiseClone() as WifiInfoItem;}
