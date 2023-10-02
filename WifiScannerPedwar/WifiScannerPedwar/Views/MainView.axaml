@@ -9,11 +9,11 @@
 	
 	<DockPanel>
 		<!--main data grid-->
-		<DataGrid x:Name="DGRD_APData" Margin="15" ItemsSource="{Binding WifiList.Items, Mode=OneWay}"
-					AutoGenerateColumns="False" GridLinesVisibility="All" BorderThickness="2"
-					IsReadOnly="True" VerticalScrollBarVisibility="Visible" 
-					HorizontalScrollBarVisibility="Visible" SelectionMode="Extended"
-					DockPanel.Dock="Top" >
+		<DataGrid x:Name="DGRD_APData" 
+			Margin="15" ItemsSource="{Binding WifiList.Items, Mode=OneWay}" AutoGenerateColumns="False" 
+			GridLinesVisibility="All" BorderThickness="2" IsReadOnly="True" VerticalScrollBarVisibility="Visible" 
+			HorizontalScrollBarVisibility="Visible" SelectionMode="Extended" DockPanel.Dock="Top"
+			VerticalAlignment="Stretch">
 			
 			<!--some styles for the data grid-->
 			<DataGrid.Styles>
@@ -42,5 +42,12 @@
 				<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}" IsVisible="False"/>
 			</DataGrid.Columns>
 		</DataGrid>
+
+		<Button x:Name="BTN_Snapshot"
+			DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" 
+			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			Margin="8" Padding="5" Height="50" FontSize="25" MinHeight="49">
+			Snapshot
+		</Button>
 	</DockPanel>
 </UserControl>
