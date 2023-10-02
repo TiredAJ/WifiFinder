@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using SDD = System.Diagnostics.Debug;
 
 using WifiScannerLib;
-using WifiScannerPedwar.Models;
 using DynamicData;
 using Avalonia.Controls;
 

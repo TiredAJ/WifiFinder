@@ -2,7 +2,6 @@
 using Avalonia.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
-using WifiScannerPedwar.Models;
 using SDD = System.Diagnostics.Debug;
 
 namespace WifiScannerPedwar.Views;

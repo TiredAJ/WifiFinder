@@ -23,6 +23,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\WifiScannerLib\WifiScannerLib.csproj" />
-    <ProjectReference Include="..\WifiScanner\WifiScannerLib.csproj" />
   </ItemGroup>
 </Project>

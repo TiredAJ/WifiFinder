@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using SDD = System.Diagnostics.Debug;
 
 using WifiScannerLib;
-using WifiScannerPedwar.Models;
 using Avalonia.Threading;
 
 namespace WifiScannerPedwar.Services
