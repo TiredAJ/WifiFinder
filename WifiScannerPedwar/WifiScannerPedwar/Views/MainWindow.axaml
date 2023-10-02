@@ -10,6 +10,10 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="WifiScannerPedwar">
 
-	<!--sets the view for the window-->
-	<views:MainView DataContext="{Binding WifiList}"/>
+	<StackPanel Orientation="Horizontal">		
+		
+	    <!--sets the view for the window-->
+	    <views:MainView DataContext="{Binding WifiList}"/>
+	</StackPanel>
+	
 </Window>
