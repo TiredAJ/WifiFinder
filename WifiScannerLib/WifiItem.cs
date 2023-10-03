@@ -43,9 +43,9 @@ namespace WifiScannerLib
 	        {SSID = SSID.Trim('\"', ' ');}
 
 
-            //https://developer.android.com/reference/android/net/wifi/ScanResult
-            //find mid between min and mad freq
-            //PrimaryFrequency = (_SR.cent
+            PrimaryFrequency = _SR.Frequency;
+
+            _Distance = DistanceCalc(PrimaryFrequency, _RSSI);
         }
 #endif
         #endregion
@@ -72,8 +72,14 @@ namespace WifiScannerLib
         }
         public string Capabilities { get; set; } = string.Empty;
         public TimeSpan LastUpdated { get; set; } = TimeSpan.Zero;
-		public decimal Distance {get; set;} = 0m;
-        private decimal PrimaryFrequency { get; set; } = 0m;
+		private double _Distance {get; set;} = 0d;
+        public string Distance
+        {
+            get => $"{_Distance.ToString("F2")}m";
+            set => _Distance = double.Parse(value);
+        }
+
+        public double PrimaryFrequency { get; set; } = 0d;
 
         public WifiInfoItem Clone()
         {return this.MemberwiseClone() as WifiInfoItem;}
@@ -92,6 +98,12 @@ namespace WifiScannerLib
             {return true;}
             else
             {return false;}
+        }
+
+        private static double DistanceCalc(double _Frequency, float _RSSI)
+        {
+            //10^((27.55 - 20*log10(f) + |R|)/20)
+            return Math.Pow(10, (27.55d - 20 * Math.Log10(_Frequency) + Math.Abs(_RSSI))/20d);
         }
     }
 }

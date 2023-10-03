@@ -16,8 +16,8 @@
 		<DataGrid x:Name="DGRD_APData" 
 			Margin="15" ItemsSource="{Binding WifiList.Items, Mode=OneWay}" AutoGenerateColumns="False" 
 			GridLinesVisibility="All" BorderThickness="2" IsReadOnly="True" HorizontalScrollBarVisibility="Visible" 
-			SelectionMode="Extended" DockPanel.Dock="Top" MinHeight="499" MaxHeight="500"
-			VerticalAlignment="Stretch" HeadersVisibility="All">
+			SelectionMode="Single" DockPanel.Dock="Top" MinHeight="499" MaxHeight="500"
+			VerticalAlignment="Stretch" HeadersVisibility="All" VerticalScrollBarVisibility="Visible">
 			
 			<!--some styles for the data grid-->
 			<DataGrid.Styles>
@@ -26,7 +26,7 @@
 				</Style>
 				
 				<Style Selector="DataGridTextColumn">
-					<Setter Property="FontSize" Value="36"/>
+					<Setter Property="FontSize" Value="34"/>
 					<Setter Property="FontFamily" Value="Consolas"/>
 				</Style>
 				
@@ -44,10 +44,12 @@
 			<!--Predefined columns (because had some issue w/ binding and autogen columns)-->
 			<DataGrid.Columns>				
 				<DataGridTextColumn Header="BSSID" Binding="{Binding BSSID}" FontWeight="Bold"/>
-				<DataGridTextColumn Header="SSID" Binding="{Binding SSID}" MaxWidth="80"/>
+				<DataGridTextColumn Header="SSID" Binding="{Binding SSID}" MaxWidth="83"/>
 				<DataGridTextColumn Header="RSSI" Binding="{Binding RSSI}"/>
-				<DataGridTextColumn Header="Capabilities" Binding="{Binding Capabilities}" IsVisible="True"/>
+				<DataGridTextColumn Header="Capabilities" Binding="{Binding Capabilities}" IsVisible="False"/>
 				<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}" IsVisible="False"/>
+				<DataGridTextColumn Header="PrimaryFrequency" Binding="{Binding PrimaryFrequency}" IsVisible="True"/>
+				<DataGridTextColumn Header="Distance" Binding="{Binding Distance}" IsVisible="True"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		

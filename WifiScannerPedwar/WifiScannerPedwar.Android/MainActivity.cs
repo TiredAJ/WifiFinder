@@ -60,7 +60,8 @@ public class MainActivity : AvaloniaMainActivity<App>
         //default boilerplate stuff idk
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
-            .UseReactiveUI();
+            .UseReactiveUI()
+            .LogToTrace(Avalonia.Logging.LogEventLevel.Fatal);
     }
 
     //this is called when the result of the permission request is received
