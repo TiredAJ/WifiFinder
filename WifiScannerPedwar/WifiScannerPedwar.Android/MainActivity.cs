@@ -73,7 +73,10 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         //checks if context isn't null, then sets IWS stuff to android version
         if (CTX != null)
-        {WifiScannerPedwar.App.IWScanner = new WifiScannerLib.AndroidWS(CTX);}
+        {
+            WifiScannerPedwar.App.IWScanner = new WifiScannerLib.AndroidWS(CTX);
+            WifiScannerPedwar.ViewModels.MainViewModel.Initialise(new WifiScannerLib.AndroidWS(CTX));
+        }
         else
         { throw new System.Exception("**** Heyo, CTX was null pall ****"); }
     }
