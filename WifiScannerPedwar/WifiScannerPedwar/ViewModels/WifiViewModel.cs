@@ -19,7 +19,8 @@ namespace WifiScannerPedwar.ViewModels
         //default constructor
         public WifiViewModel(IEnumerable<WifiInfoItem> _Items)
         {
-            Items = new Avalonia.Collections.AvaloniaDictionary<string, WifiInfoItem>();
+            //Items = new Avalonia.Collections.AvaloniaDictionary<string, WifiInfoItem>();
+            Items = new ObservableCollection<WifiInfoItem>();
 
             AddItems(_Items);
 
@@ -27,7 +28,10 @@ namespace WifiScannerPedwar.ViewModels
         }
 
         public WifiViewModel()
-        {Items = new Avalonia.Collections.AvaloniaDictionary<string, WifiInfoItem>();}
+        {
+            //Items = new Avalonia.Collections.AvaloniaDictionary<string, WifiInfoItem>();
+            Items = new ObservableCollection<WifiInfoItem>();
+        }
 
         //adds items to the Items collection
         public void AddItems(IEnumerable<WifiInfoItem> _Wifis)
@@ -51,28 +55,22 @@ namespace WifiScannerPedwar.ViewModels
             }
         }
 
-        //don't like tbh
-        //private int FindIndex(WifiInfoItem _WII)
-        //{
-        //    //loops through collection and checks if a WII exists with the same BSSID
-        //    for (int i = 0; i < Items.Count(); i++)
-        //    {
-        //        if (Items[i].BSSID == _WII.BSSID)
-        //        {return i;}
-        //    }
-
-        //    //doesn't exist result
-        //    return -1;
-        //}
-
         //holds the items
-        //public ObservableCollection<WifiInfoItem> Items { get; private set;}
+        public ObservableCollection<WifiInfoItem> Items { get; private set;}
 
         //public ObservableConcurrentDictionary<string, WifiInfoItem> Items { get; private set; }
 
-        public Avalonia.Collections.AvaloniaDictionary<string, WifiInfoItem> Items { get; private set; }
+        //public Avalonia.Collections.AvaloniaDictionary<string, WifiInfoItem> Items { get; private set; }
 
         //for future?
         public int Update { get; set; }
+
+        //notes for later AJ:
+        //fix the shit with the scanner, u know what I'm talking about:
+        //  - have the scanner hold an internal concurrent dictionary which is updated /independently/
+        //      data is obtained by reading the dictionary
+        //  - replace IEnumerable with dictionary.tolist() or something and loop through that
+        //  - get data into observable collection?
+        //  - map the whole program, u keep getting lost
     }
 }
