@@ -64,15 +64,18 @@ namespace WifiScannerLib
 
         public string BSSID { get; set; } = string.Empty;
         public string SSID { get; set; } = string.Empty;
+	
         private float _RSSI = -101;
         public string RSSI
         {
             get => _RSSI.ToString("#dbm");
             set => _RSSI = float.Parse(value); 
         }
+	
         public string Capabilities { get; set; } = string.Empty;
         public TimeSpan LastUpdated { get; set; } = TimeSpan.Zero;
-		private double _Distance {get; set;} = 0d;
+	
+	private double _Distance {get; set;} = 0d;
         public string Distance
         {
             get => $"{_Distance.ToString("F2")}m";
@@ -80,6 +83,7 @@ namespace WifiScannerLib
         }
 
         public double PrimaryFrequency { get; set; } = 0d;
+
 
         public WifiInfoItem Clone()
         {return this.MemberwiseClone() as WifiInfoItem;}
