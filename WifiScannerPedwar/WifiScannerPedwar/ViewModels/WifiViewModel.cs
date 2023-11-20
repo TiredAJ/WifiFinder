@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Concurrent;
-using Avalonia.Collections;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SDD = System.Diagnostics.Debug;
 
 using WifiScannerLib;
-using DynamicData;
-using Avalonia.Controls;
 
 namespace WifiScannerPedwar.ViewModels
 {
@@ -19,51 +10,32 @@ namespace WifiScannerPedwar.ViewModels
         //default constructor
         public WifiViewModel(IEnumerable<WifiInfoItem> _Items)
         {
-            //Items = new Avalonia.Collections.AvaloniaDictionary<string, WifiInfoItem>();
-            Items = new ObservableCollection<WifiInfoItem>();
+            Items = new Dictionary<string, WifiInfoItem>();
 
             AddItems(_Items);
-
-            //Items = new ObservableCollection<WifiInfoItem>(_Items);
         }
 
         public WifiViewModel()
         {
             //Items = new Avalonia.Collections.AvaloniaDictionary<string, WifiInfoItem>();
-            Items = new ObservableCollection<WifiInfoItem>();
+            Items = new Dictionary<string, WifiInfoItem>();
         }
 
         //adds items to the Items collection
         public void AddItems(IEnumerable<WifiInfoItem> _Wifis)
         {
-            //int Index;
-
             //loops through given collection
             foreach (WifiInfoItem W in _Wifis.ToList())
             {
                 if (!Items.TryAdd(W.BSSID, W))
-                {Items[W.BSSID] = W;}
-
-                ////checks if the entry already exists
-                //Index = FindIndex(W);
-
-                ////checks the result and updates or adds accordingly
-                //if (Index != -1)
-                //{ Items[Index] = W; }
-                //else
-                //{ Items.Add(W); }
+                { Items[W.BSSID] = W; }
             }
         }
 
-        //holds the items
-        public ObservableCollection<WifiInfoItem> Items { get; private set;}
-
-        //public ObservableConcurrentDictionary<string, WifiInfoItem> Items { get; private set; }
-
-        //public Avalonia.Collections.AvaloniaDictionary<string, WifiInfoItem> Items { get; private set; }
+        private Dictionary<string, WifiInfoItem> Items = new Dictionary<string, WifiInfoItem>();
 
         //for future?
-        public int Update { get; set; }
+        public int NoAccessPoints { get; set; }
 
         //notes for later AJ:
         //fix the shit with the scanner, u know what I'm talking about:

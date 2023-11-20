@@ -1,86 +1,46 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:WifiScannerPedwar.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="3200"
-             x:Class="WifiScannerPedwar.Views.MainView"
-             x:DataType="vm:MainViewModel">
+<UserControl
+    x:Class="WifiScannerPedwar.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:WifiScannerPedwar.ViewModels"
+    d:DesignHeight="3200"
+    d:DesignWidth="1440"
+    x:DataType="vm:MainViewModel"
+    mc:Ignorable="d">
 
-	<UserControl.Styles>
-		
-	</UserControl.Styles>
-	
-	<DockPanel LastChildFill="True">		
-		<!--main data grid-->
-		<DataGrid x:Name="DGRD_APData" 
-			Margin="15" ItemsSource="{Binding WifiList.Items, Mode=OneWay}" AutoGenerateColumns="False" 
-			GridLinesVisibility="All" BorderThickness="2" IsReadOnly="True" HorizontalScrollBarVisibility="Visible" 
-			SelectionMode="Single" DockPanel.Dock="Top" MinHeight="499" MaxHeight="500"
-			VerticalAlignment="Stretch" HeadersVisibility="All" VerticalScrollBarVisibility="Visible">
-			
-			<!--some styles for the data grid-->
-			<DataGrid.Styles>
-				<Style Selector="DataGridCell">
-					<Setter Property="Focusable" Value="False"/>
-				</Style>
-				
-				<Style Selector="DataGridTextColumn">
-					<Setter Property="FontSize" Value="34"/>
-					<Setter Property="FontFamily" Value="Consolas"/>
-				</Style>
-				
-				<Style Selector="DataGridColumnHeader">
-					<Setter Property="FontWeight" Value="Heavy"/>
-					<Setter Property="HorizontalAlignment" Value="Center"/>
-					<Setter Property="Focusable" Value="False"/>
-				</Style>
+    <UserControl.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="40" />
+        </Style>
+    </UserControl.Styles>
 
-				<Style Selector="ScrollBar">
-					<Setter Property="Width" Value="20"/>
-				</Style>
-			</DataGrid.Styles>
 
-			<!--Predefined columns (because had some issue w/ binding and autogen columns)-->
-			<DataGrid.Columns>				
-				<DataGridTextColumn Header="BSSID" Binding="{Binding BSSID}" FontWeight="Bold"/>
-				<DataGridTextColumn Header="SSID" Binding="{Binding SSID}" MaxWidth="83"/>
-				<DataGridTextColumn Header="RSSI" Binding="{Binding RSSI}"/>
-				<DataGridTextColumn Header="Capabilities" Binding="{Binding Capabilities}" IsVisible="False"/>
-				<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}" IsVisible="False"/>
-				<DataGridTextColumn Header="PrimaryFrequency" Binding="{Binding PrimaryFrequency}" IsVisible="True"/>
-				<DataGridTextColumn Header="Distance" Binding="{Binding Distance}" IsVisible="True"/>
-			</DataGrid.Columns>
-		</DataGrid>
-		
-		<StackPanel DockPanel.Dock="Bottom">
-			<StackPanel.Styles>
-				<Style Selector="TextBlock">
-					<Setter Property="FontSize" Value="20"/>
-					<Setter Property="Margin" Value="10, 4, 0, 0"/>
-				</Style>
-			</StackPanel.Styles>			
-			
-			<TextBlock Text="Details" TextDecorations="Underline" FontSize="28"/>
-			
-			<Grid ColumnDefinitions="*,*" RowDefinitions="Auto, Auto, Auto">
-				<TextBlock Grid.Column="0" Grid.Row="0" Text="BSSID:"/>
-				<TextBlock Grid.Column="1" Grid.Row="0" x:Name="TXT_BSSID"/>
-				
-				<TextBlock Grid.Column="0" Grid.Row="1" Text="SSID:"/>
-				<TextBlock Grid.Column="1" Grid.Row="1" x:Name="TXT_SSID"/>
-				
-				<TextBlock Grid.Column="0" Grid.Row="2" Text="Signal:"/>
-				<TextBlock Grid.Column="1" Grid.Row="2" x:Name="TXT_Strength"/>
-			</Grid>
-			
-			<Button x:Name="BTN_Snapshot"
-				HorizontalAlignment="Stretch" 
-				HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-				Margin="8,20,8,8" Padding="5" Height="60" FontSize="35" MinHeight="59">
-				Snapshot
-			</Button>			
-		</StackPanel>
+    <DockPanel>
+        <Separator
+            Height="320"
+            Background="Transparent"
+            DockPanel.Dock="Top" />
 
-	</DockPanel>
+        <TextBlock Margin="10" DockPanel.Dock="Top">
+            My favourite part was when the scanner said<LineBreak />
+            "It's scannin' time" and scanned all over the place</TextBlock>
+
+        <Button Margin="40" DockPanel.Dock="Bottom">
+            <TextBlock>Collect data!</TextBlock>
+            <Button.Styles>
+                <Style Selector="Button">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="MinWidth" Value="600" />
+                    <Setter Property="MinHeight" Value="300" />
+
+                </Style>
+            </Button.Styles>
+        </Button>
+    </DockPanel>
+
 </UserControl>
