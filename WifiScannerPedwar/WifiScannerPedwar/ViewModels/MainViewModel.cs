@@ -26,6 +26,8 @@ public class MainViewModel : ViewModelBase
         //initial data nabbing
         var Data = WS.GetItems();
 
+
+
         //generates new data holder
         WifiList = new WifiViewModel(Data);
 
@@ -33,6 +35,9 @@ public class MainViewModel : ViewModelBase
         SDD.WriteLine("Items got");
     }
 
+    public
+
     //data holder
-    public static WifiViewModel WifiList { get; private set; } = new WifiViewModel();
+    public static WifiViewModel WifiList
+    { get; private set; } = new WifiViewModel();
 }

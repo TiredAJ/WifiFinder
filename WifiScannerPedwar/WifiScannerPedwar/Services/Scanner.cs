@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-
 using WifiScannerLib;
 
 namespace WifiScannerPedwar.Services
@@ -10,15 +8,27 @@ namespace WifiScannerPedwar.Services
     {
         public IWS? WScanner;
 
-        public WifiService(IWS? _WScanner)
-        { WScanner = _WScanner; }
+        Dictionary<string, WifiInfoItem> Data;
 
-        public IEnumerable<WifiInfoItem> GetItems()
+        public WifiService(IWS? _WScanner)
+        {
+            WScanner = _WScanner;
+
+            WScanner.ScanReturned += ScanReturned;
+        }
+
+        private void ScanReturned(object? sender, System.EventArgs e)
+        {
+            if (e is WifiEvent We)
+            { var Data = We.Data; }
+        }
+
+        public Dictionary<string, WifiInfoItem>? GetItems()
         {
             if (WScanner != null)
-            { return WScanner.GetData(); }
+            { return Data; }
             else
-            { return Enumerable.Empty<WifiInfoItem>(); }
+            { return null; }
         }
     }
 }

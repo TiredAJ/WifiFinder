@@ -15,18 +15,21 @@
             <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="40" />
+            <Setter Property="FontSize" Value="20" />
         </Style>
     </UserControl.Styles>
 
 
     <DockPanel>
         <Separator
-            Height="320"
+            Height="150"
             Background="Transparent"
             DockPanel.Dock="Top" />
 
-        <TextBlock Margin="10" DockPanel.Dock="Top">
+        <TextBlock
+            Margin="10"
+            DockPanel.Dock="Top"
+            TextWrapping="WrapWithOverflow">
             My favourite part was when the scanner said<LineBreak />
             "It's scannin' time" and scanned all over the place</TextBlock>
 
@@ -35,8 +38,8 @@
             <Button.Styles>
                 <Style Selector="Button">
                     <Setter Property="HorizontalAlignment" Value="Center" />
-                    <Setter Property="MinWidth" Value="600" />
-                    <Setter Property="MinHeight" Value="300" />
+                    <Setter Property="MinWidth" Value="200" />
+                    <Setter Property="MinHeight" Value="50" />
 
                 </Style>
             </Button.Styles>
