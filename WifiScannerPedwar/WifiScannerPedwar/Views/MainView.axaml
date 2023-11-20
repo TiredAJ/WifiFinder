@@ -33,7 +33,10 @@
             My favourite part was when the scanner said<LineBreak />
             "It's scannin' time" and scanned all over the place</TextBlock>
 
-        <Button Margin="40" DockPanel.Dock="Bottom">
+        <Button
+            x:Name="btn_ScanNow"
+            Margin="40"
+            DockPanel.Dock="Bottom">
             <TextBlock>Collect data!</TextBlock>
             <Button.Styles>
                 <Style Selector="Button">

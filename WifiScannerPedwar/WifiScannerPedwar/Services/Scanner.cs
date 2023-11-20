@@ -23,12 +23,15 @@ namespace WifiScannerPedwar.Services
             { var Data = We.Data; }
         }
 
-        public Dictionary<string, WifiInfoItem>? GetItems()
-        {
-            if (WScanner != null)
-            { return Data; }
-            else
-            { return null; }
-        }
+        public void TriggerScan()
+        { WScanner.TriggerScan(); }
+
+        private void SaveData()
+        { }
     }
+
+    //Potential options
+    /*
+     * - Session file vs file-per-scan
+     */
 }
