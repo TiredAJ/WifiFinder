@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Avalonia.Platform.Storage;
+using System.Collections.Generic;
 using WifiScannerLib;
 
 namespace WifiScannerPedwar.Services
@@ -7,8 +8,11 @@ namespace WifiScannerPedwar.Services
     public class WifiService
     {
         public IWS? WScanner;
+        public static IStorageProvider? Storage = null;
 
-        Dictionary<string, WifiInfoItem> Data;
+
+        private Dictionary<string, WifiInfoItem> Data;
+        private static int PosCounter = 0;
 
         public WifiService(IWS? _WScanner)
         {
@@ -27,7 +31,9 @@ namespace WifiScannerPedwar.Services
         { WScanner.TriggerScan(); }
 
         private void SaveData()
-        { }
+        {
+
+        }
     }
 
     //Potential options

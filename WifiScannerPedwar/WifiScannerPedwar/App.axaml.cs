@@ -1,10 +1,9 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-
+using WifiScannerLib;
 using WifiScannerPedwar.ViewModels;
 using WifiScannerPedwar.Views;
-using WifiScannerLib;
 
 namespace WifiScannerPedwar;
 

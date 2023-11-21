@@ -1,19 +1,22 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:WifiScannerPedwar.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:WifiScannerPedwar.Views"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="WifiScannerPedwar.Views.MainWindow"
-		x:DataType="vm:MainViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="WifiScannerPedwar">
+<Window
+    x:Class="WifiScannerPedwar.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:WifiScannerPedwar.Views"
+    xmlns:vm="using:WifiScannerPedwar.ViewModels"
+    Title="WifiScannerPedwar"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
 
-	<StackPanel Orientation="Horizontal">		
-		
-	    <!--sets the view for the window-->
-	    <views:MainView DataContext="{Binding WifiList}"/>
-	</StackPanel>
-	
+    <StackPanel Orientation="Horizontal">
+
+        <!--  sets the view for the window  -->
+        <views:MainView />
+    </StackPanel>
+
 </Window>

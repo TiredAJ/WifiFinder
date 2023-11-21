@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WifiScannerPedwar.iOS", "Wi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WifiScannerLib", "..\..\WifiScannerLib\WifiScannerLib.csproj", "{08D2ADF8-0B09-44BB-AA55-BC21C08DBF1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WifiLibSerialisationTester", "WifiLibSerialisationTester\WifiLibSerialisationTester.csproj", "{E9882D03-A64A-4A3B-8455-43C399272AC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{08D2ADF8-0B09-44BB-AA55-BC21C08DBF1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08D2ADF8-0B09-44BB-AA55-BC21C08DBF1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08D2ADF8-0B09-44BB-AA55-BC21C08DBF1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9882D03-A64A-4A3B-8455-43C399272AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9882D03-A64A-4A3B-8455-43C399272AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9882D03-A64A-4A3B-8455-43C399272AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9882D03-A64A-4A3B-8455-43C399272AC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
