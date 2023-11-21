@@ -1,14 +1,13 @@
 ﻿using Avalonia.Controls;
 using WifiScannerPedwar.Services;
 using WifiScannerPedwar.ViewModels;
+using WifiScannerPedwar.Services;
 using SDD = System.Diagnostics.Debug;
 
 namespace WifiScannerPedwar.Views;
 
 public partial class MainView : UserControl
 {
-    MainViewModel MVM;
-
     public MainView()
     {
         InitializeComponent();
