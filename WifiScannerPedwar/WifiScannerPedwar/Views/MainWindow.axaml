@@ -13,10 +13,5 @@
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal">
-
-        <!--  sets the view for the window  -->
-        <views:MainView />
-    </StackPanel>
-
+    <views:MainView />
 </Window>

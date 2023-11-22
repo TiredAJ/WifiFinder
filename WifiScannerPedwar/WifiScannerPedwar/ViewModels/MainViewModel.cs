@@ -1,11 +1,21 @@
-﻿using WifiScannerLib;
+﻿using Avalonia.Platform.Storage;
+using WifiScannerLib;
 using WifiScannerPedwar.Services;
+using SDD = System.Diagnostics.Debug;
+
 
 namespace WifiScannerPedwar.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
     private static WifiService WS;
+    public static bool IsInitialised = false;
+    public static IStorageProvider? ISP
+    {
+        get => WS.Storage;
+        set
+        { WS.Storage = value; }
+    }
 
     public MainViewModel(IWS? _IWScanner)
     {
@@ -16,15 +26,23 @@ public class MainViewModel : ViewModelBase
         {/*something to do while waiting for perms*/}
     }
 
+    public MainViewModel()
+    { }
+
     public static void Initialise(IWS _IWScanner)
     {
         //creates a new wifi service using the selected IWS
         WS = new WifiService(_IWScanner);
+
+        IsInitialised = true;
 
         //initial data nabbing
         WS.TriggerScan();
     }
 
     public void TriggerScan()
-    { WS.TriggerScan(); }
+    {
+        SDD.WriteLine("MVM Scan triggered!");
+        WS.TriggerScan();
+    }
 }

@@ -1,24 +1,38 @@
 ﻿using Avalonia.Controls;
-using WifiScannerPedwar.Services;
+using MsBox.Avalonia;
 using WifiScannerPedwar.ViewModels;
-using WifiScannerPedwar.Services;
+
 using SDD = System.Diagnostics.Debug;
 
 namespace WifiScannerPedwar.Views;
 
 public partial class MainView : UserControl
 {
+    MainViewModel MVM = new MainViewModel();
+
     public MainView()
     {
         InitializeComponent();
 
-        WifiService.Storage = TopLevel.GetTopLevel(btn_ScanNow).StorageProvider;
+        //WifiService.Storage = TopLevel.GetTopLevel(btn_ScanNow).StorageProvider;
 
-        SDD.WriteLine("eyo, storey boi found!");
+        btn_ScanNow.Click += Snapshot_Click;
     }
 
-    private void Snapshot_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private async void Snapshot_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
+        MainViewModel.ISP = TopLevel.GetTopLevel(btn_ScanNow).StorageProvider;
+
+        if (!MainViewModel.IsInitialised)
+        {
+            var box = MessageBoxManager
+                                        .GetMessageBoxStandard("SErvice error", "Service is not initialised!");
+
+            var result = await box.ShowAsync();
+        }
+
+        MVM.TriggerScan();
+
         SDD.WriteLine("Snapshot taken!");
     }
 }

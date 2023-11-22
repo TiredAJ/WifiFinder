@@ -1,17 +1,11 @@
 ﻿using Android;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
-using System.Threading.Tasks;
-using WifiScannerLib;
-using WifiScannerPedwar.Services;
-using WifiScannerPedwar.ViewModels;
 using System.Collections.Generic;
-using Android.Content;
-using Android.Service.Controls.Templates;
-using SDD = System.Diagnostics.Debug;
 
 namespace WifiScannerPedwar.Android;
 
