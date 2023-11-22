@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Concurrent;
-using Avalonia.Collections;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SDD = System.Diagnostics.Debug;
 
 using WifiScannerLib;
-using DynamicData;
-using Avalonia.Controls;
 
 namespace WifiScannerPedwar.ViewModels
 {
@@ -42,7 +34,7 @@ namespace WifiScannerPedwar.ViewModels
             foreach (WifiInfoItem W in _Wifis.ToList())
             {
                 if (!Items.TryAdd(W.BSSID, W))
-                {Items[W.BSSID] = W;}
+                { Items[W.BSSID] = W; }
 
                 ////checks if the entry already exists
                 //Index = FindIndex(W);
@@ -56,7 +48,7 @@ namespace WifiScannerPedwar.ViewModels
         }
 
         //holds the items
-        public ObservableCollection<WifiInfoItem> Items { get; private set;}
+        public ObservableCollection<WifiInfoItem> Items { get; private set; }
 
         //public ObservableConcurrentDictionary<string, WifiInfoItem> Items { get; private set; }
 
