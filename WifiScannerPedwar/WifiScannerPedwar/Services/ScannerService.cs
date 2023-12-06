@@ -1,10 +1,13 @@
-﻿using Avalonia.Platform.Storage;
-using MsBox.Avalonia;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+
+using Avalonia.Platform.Storage;
+
+using MsBox.Avalonia;
+
 using WifiScannerLib;
 
 using SDD = System.Diagnostics.Debug;
@@ -16,7 +19,6 @@ namespace WifiScannerPedwar.Services
     {
         public static IWS? WScanner;
         public IStorageProvider? Storage = null;
-
 
         private Dictionary<string, WifiInfoItem> Data;
         private static int PosCounter = 0;
