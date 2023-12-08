@@ -2,9 +2,11 @@
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+
 using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
+
 using System.Collections.Generic;
 
 namespace WifiScannerPedwar.Android;

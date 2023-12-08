@@ -1,6 +1,9 @@
 ﻿using Avalonia.Platform.Storage;
+
 using WifiScannerLib;
+
 using WifiScannerPedwar.Services;
+
 using SDD = System.Diagnostics.Debug;
 
 
@@ -10,12 +13,8 @@ public class MainViewModel : ViewModelBase
 {
     private static WifiService WS;
     public static bool IsInitialised = false;
-    public static IStorageProvider? ISP
-    {
-        get => WS.Storage;
-        set
-        { WS.Storage = value; }
-    }
+
+    public string APCountText { get; set; } = "No APs scanned atm";
 
     public MainViewModel(IWS? _IWScanner)
     {
@@ -37,7 +36,7 @@ public class MainViewModel : ViewModelBase
         IsInitialised = true;
 
         //initial data nabbing
-        WS.TriggerScan();
+        //WS.TriggerScan();
     }
 
     public void TriggerScan()
@@ -45,4 +44,7 @@ public class MainViewModel : ViewModelBase
         SDD.WriteLine("MVM Scan triggered!");
         WS.TriggerScan();
     }
+
+    public void SaveData(IStorageProvider _ISP)
+    { _ = WS.SaveToFile(_ISP); }
 }

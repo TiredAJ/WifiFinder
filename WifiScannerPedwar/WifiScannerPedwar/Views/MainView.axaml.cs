@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
+
 using MsBox.Avalonia;
+
 using WifiScannerPedwar.ViewModels;
 
 using SDD = System.Diagnostics.Debug;
@@ -17,16 +19,18 @@ public partial class MainView : UserControl
         //WifiService.Storage = TopLevel.GetTopLevel(btn_ScanNow).StorageProvider;
 
         btn_ScanNow.Click += Snapshot_Click;
+        btn_SaveData.Click += Btn_SaveData_Click;
     }
+
+    private void Btn_SaveData_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    { MVM.SaveData(TopLevel.GetTopLevel(btn_SaveData).StorageProvider); }
 
     private async void Snapshot_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        MainViewModel.ISP = TopLevel.GetTopLevel(btn_ScanNow).StorageProvider;
-
         if (!MainViewModel.IsInitialised)
         {
             var box = MessageBoxManager
-                                        .GetMessageBoxStandard("SErvice error", "Service is not initialised!");
+                                        .GetMessageBoxStandard("Service error", "Service is not initialised!");
 
             var result = await box.ShowAsync();
         }

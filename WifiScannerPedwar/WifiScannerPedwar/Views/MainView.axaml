@@ -17,6 +17,13 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="20" />
         </Style>
+		<Style Selector="Button">
+			<Setter Property="HorizontalAlignment" Value="Center" />
+			<Setter Property="MinWidth" Value="200" />
+			<Setter Property="MinHeight" Value="50" />
+			<Setter Property="Margin" Value="60"/>
+
+		</Style>
     </UserControl.Styles>
 
 
@@ -33,20 +40,18 @@
             My favourite part was when the scanner said<LineBreak />
             "It's scannin' time" and scanned all over the place</TextBlock>
 
-        <Button
-            x:Name="btn_ScanNow"
-            Margin="40"
-            DockPanel.Dock="Bottom">
-            <TextBlock>Collect data!</TextBlock>
-            <Button.Styles>
-                <Style Selector="Button">
-                    <Setter Property="HorizontalAlignment" Value="Center" />
-                    <Setter Property="MinWidth" Value="200" />
-                    <Setter Property="MinHeight" Value="50" />
-
-                </Style>
-            </Button.Styles>
-        </Button>
+		<StackPanel DockPanel.Dock="Bottom" Margin="5">
+            <Button x:Name="btn_ScanNow">
+                <TextBlock>Collect data!</TextBlock>
+            </Button>
+			<TextBlock x:Name="txt_NoAPs" Text="{Binding APCountText}">
+				No APs Scanned atm
+			</TextBlock>
+            <Button x:Name="btn_SaveData">
+                <TextBlock>Save data!</TextBlock>
+            </Button>
+			
+		</StackPanel>
     </DockPanel>
 
 </UserControl>
