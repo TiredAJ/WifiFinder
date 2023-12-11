@@ -20,7 +20,11 @@ public partial class MainView : UserControl
 
         btn_ScanNow.Click += Snapshot_Click;
         btn_SaveData.Click += Btn_SaveData_Click;
+        btn_ClearData.Click += Btn_ClearData_Click;
     }
+
+    private void Btn_ClearData_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    { MVM.ClearData(); }
 
     private void Btn_SaveData_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     { MVM.SaveData(TopLevel.GetTopLevel(btn_SaveData).StorageProvider); }

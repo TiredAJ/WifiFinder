@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 using WifiScannerLib;
@@ -18,7 +19,8 @@ namespace WifiScannerPedwar.Services
     public class WifiService
     {
         public static IWS? WScanner;
-        private List<Dictionary<string, WifiInfoItem>> Data = new List<Dictionary<string, WifiInfoItem>>();
+        private List<SnapshotData> Data = new List<SnapshotData>();
+        public event EventHandler<APCount> CountUpdated;
 
         public WifiService(IWS? _WScanner)
         {
@@ -49,7 +51,9 @@ namespace WifiScannerPedwar.Services
             else
             { SDD.WriteLine("Data was null!"); return; }
 
-            Data.Add(IntermediateData);
+            Data.Add(new SnapshotData(DateTime.Now.TimeOfDay, IntermediateData));
+
+            CountUpdated?.Invoke(this, new APCount(Data.InternalCount()));
         }
 
         public void TriggerScan()
@@ -77,7 +81,7 @@ namespace WifiScannerPedwar.Services
 
                 try
                 {
-                    ErrorBox("Data", $"{Data.Count} Items written");
+                    //ErrorBox("Data", $"{Data.Count} Items written");
 
                     using (StreamWriter Writer = new StreamWriter(await ISF.OpenWriteAsync()))
                     {
@@ -93,8 +97,16 @@ namespace WifiScannerPedwar.Services
             else
             { ErrorBox("Storage error", "Could not access storage"); }
 
-            ErrorBox("Data Cleared", $"{Data.Count} Items");
+            CountUpdated?.Invoke(this, new APCount(Data.InternalCount()));
+
+            //ErrorBox("Data Cleared", $"{Data.Count} Items");
             return;
+        }
+
+        public void ClearData()
+        {
+            Data.Clear();
+            CountUpdated?.Invoke(this, new APCount(Data.InternalCount()));
         }
 
         private void ErrorBox(string _Title, string _Text)
@@ -104,6 +116,28 @@ namespace WifiScannerPedwar.Services
                 .ShowAsync();
 
             SDD.WriteLine($"MessageBox sent: {_Title}, {_Text}");
+        }
+    }
+
+    public class APCount : EventArgs
+    {
+        public int Count { get; set; }
+
+        public APCount(int _Count)
+        { Count = _Count; }
+    }
+
+    public record SnapshotData
+    {
+        [JsonInclude]
+        public TimeSpan LastUpdated { get; private set; }
+        [JsonInclude]
+        public Dictionary<string, WifiInfoItem> Data { get; private set; }
+
+        public SnapshotData(TimeSpan _LastUp, Dictionary<string, WifiInfoItem> _Data)
+        {
+            LastUpdated = _LastUp;
+            Data = _Data;
         }
     }
 }
