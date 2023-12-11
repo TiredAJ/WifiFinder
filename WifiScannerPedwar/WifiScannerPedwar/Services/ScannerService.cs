@@ -33,8 +33,7 @@ namespace WifiScannerPedwar.Services
         }
 
         public static bool CheckLocation()
-        {
-        }
+        { throw new NotImplementedException(); }
 
         private void ScanReturned(object? sender, System.EventArgs e)
         {
@@ -76,19 +75,25 @@ namespace WifiScannerPedwar.Services
                     return;
                 }
 
-                await Task.Run(async () =>
+                try
                 {
+                    ErrorBox("Data", $"{Data.Count} Items written");
+
                     using (StreamWriter Writer = new StreamWriter(await ISF.OpenWriteAsync()))
                     {
-                        Writer.Write
+                        await Writer.WriteAsync
                         (JsonSerializer.Serialize(Data, new JsonSerializerOptions() { WriteIndented = true }));
                     }
+                }
+                catch (Exception EXC)
+                { ErrorBox("Error!", EXC.Message); }
 
-                    Data.Clear();
-                });
+                Data.Clear();
             }
             else
             { ErrorBox("Storage error", "Could not access storage"); }
+
+            ErrorBox("Data Cleared", $"{Data.Count} Items");
             return;
         }
 
@@ -97,6 +102,8 @@ namespace WifiScannerPedwar.Services
             MessageBoxManager
                 .GetMessageBoxStandard(_Title, _Text)
                 .ShowAsync();
+
+            SDD.WriteLine($"MessageBox sent: {_Title}, {_Text}");
         }
     }
 }
