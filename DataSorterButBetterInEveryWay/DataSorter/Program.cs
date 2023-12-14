@@ -13,6 +13,8 @@ namespace DataSorter
         static void Main(string[] args)
         {
             DataLoader();
+
+            FlattenData();
         }
 
         static void DataLoader()
@@ -37,7 +39,6 @@ namespace DataSorter
                     { TempList.Add(new SnapshotData(JN)); }
 
                     InitData.Add(TempList);
-                    TempList.Clear();
                 }
             }
 
@@ -46,7 +47,7 @@ namespace DataSorter
 
         static void FlattenData()
         {
-            Dictionary<string, List<FlattenedData>> Intermediate = new Dictionary<string, List<FlattenedData>>();
+            Dictionary<int, Dictionary<string, List<FlattenedData>>> Intermediate = new Dictionary<int, Dictionary<string, List<FlattenedData>>>();
 
             //you fucking idiot, it needs to be flattened to per node,
             //not per AP
@@ -55,24 +56,40 @@ namespace DataSorter
             {//ID is a file
 
                 foreach (var Snap in ID)
-                {//Snap is a snapshot from a file
+                {//each snapshot in a file
 
-                    foreach (var KVP in Snap.Data)
-                    {//KVP is an AP from a snapshot
+                    if (Intermediate.ContainsKey(Snap.Index))
+                    {//check if Intermediate has this index
 
-                        if (Intermediate.ContainsKey(KVP.Key))
-                        { Intermediate[KVP.Key].Add(new FlattenedData(KVP.Value)); }
-                        else
-                        {
-                            Intermediate.Add(KVP.Key, new List<FlattenedData>()
-                                { new FlattenedData(KVP.Value) });
-                        }
+                        PushData(Intermediate, Snap);
+                    }
+                    else
+                    {
+                        Intermediate.Add(Snap.Index, new Dictionary<string, List<FlattenedData>>());
+                        PushData(Intermediate, Snap);
                     }
                 }
             }
 
-            foreach (var I in Intermediate)
-            { Data.Add(I.Key, I.Value.Average()); }
+            //foreach (var I in Intermediate)
+            //{ Data.Add(I.Key, I.Value.Average()); }
+        }
+
+        private static void PushData(
+            Dictionary<int, Dictionary<string, List<FlattenedData>>> _Intermediate,
+            SnapshotData _Snap)
+        {
+            foreach (var KVP in _Snap.Data)
+            {
+                if (_Intermediate[_Snap.Index].ContainsKey(KVP.Key))
+                { _Intermediate[_Snap.Index][KVP.Key].Add(new FlattenedData(KVP.Value)); }
+                else
+                {
+                    _Intermediate[_Snap.Index].Add(KVP.Key,
+                        new List<FlattenedData>()
+                            { new FlattenedData(KVP.Value) });
+                }
+            }
         }
 
         private void SaveData()
