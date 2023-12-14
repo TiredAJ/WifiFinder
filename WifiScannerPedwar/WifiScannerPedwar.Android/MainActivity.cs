@@ -29,6 +29,9 @@ public class MainActivity : AvaloniaMainActivity<App>
         List<string> TempPerms = new List<string>();
         CTX = this.ApplicationContext;
 
+        if (CTX == null)
+        { throw new System.Exception("CTX was null!"); }
+
 #if ANDROID23_0_OR_GREATER
         //goes through and checks what permissions we have vs what we need
         //what we need but don't have is added to a list

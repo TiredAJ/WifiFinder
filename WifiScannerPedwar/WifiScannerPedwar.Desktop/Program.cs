@@ -1,7 +1,9 @@
-﻿using System;
+﻿// Ignore Spelling: Avalonia
 
 using Avalonia;
 using Avalonia.ReactiveUI;
+
+using System;
 
 namespace WifiScannerPedwar.Desktop;
 

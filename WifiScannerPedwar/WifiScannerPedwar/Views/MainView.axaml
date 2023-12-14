@@ -37,15 +37,15 @@
             DockPanel.Dock="Top"
             TextWrapping="WrapWithOverflow">
             My favourite part was when the scanner said<LineBreak />
-            "It's scannin' time" and scanned all over the place</TextBlock>
+            "It's scannin' time"</TextBlock>
 
 		<StackPanel DockPanel.Dock="Bottom" Margin="5">
-            <Button x:Name="btn_ScanNow">
-                <TextBlock>Collect data!</TextBlock>
-            </Button>
 			<TextBlock x:Name="txt_NoAPs" Text="{Binding APCountText, Mode=OneWay}">
 				No APs Scanned atm
 			</TextBlock>
+            <Button x:Name="btn_ScanNow">
+                <TextBlock>Collect data!</TextBlock>
+            </Button>
             <Button x:Name="btn_SaveData">
                 <TextBlock>Save data!</TextBlock>
             </Button>

@@ -2,6 +2,9 @@
 
 using ReactiveUI;
 
+using System.Collections.Generic;
+using System.Linq;
+
 using WifiScannerLib;
 
 using WifiScannerPedwar.Services;
@@ -33,6 +36,16 @@ public class MainViewModel : ViewModelBase
         {/*something to do while waiting for perms*/}
 
         WS.CountUpdated += CountUpdated;
+        WS.Sorter = (In) =>
+        {
+            List<string> AllowedSSIDs = new List<string>()
+            { "usw", "usw-ce", "usw-guest", "usw-openday", "eduroam", "hydra5ghz"};
+
+            In = In.Where(X => AllowedSSIDs.Contains(X.Value.SSID.ToLower()))
+                    .ToDictionary(X => X.Key, Y => Y.Value);
+
+            return In;
+        };
     }
 
     public MainViewModel()

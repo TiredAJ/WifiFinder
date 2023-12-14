@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 using WifiScannerLib;
@@ -21,12 +20,11 @@ namespace WifiScannerPedwar.Services
         public static IWS? WScanner;
         private List<SnapshotData> Data = new List<SnapshotData>();
         public event EventHandler<APCount> CountUpdated;
+        public Func<Dictionary<string, WifiInfoItem>, Dictionary<string, WifiInfoItem>>? Sorter = null;
 
         public WifiService(IWS? _WScanner)
         {
             WScanner = _WScanner;
-
-            SDD.WriteLine($"WScanner is {WScanner.GetType()}");
 
             if (WScanner != null)
             { WScanner.ScanReturned += ScanReturned; }
@@ -51,6 +49,9 @@ namespace WifiScannerPedwar.Services
             else
             { SDD.WriteLine("Data was null!"); return; }
 
+            if (Sorter != null)
+            { IntermediateData = Sorter(IntermediateData); }
+
             Data.Add(new SnapshotData(DateTime.Now.TimeOfDay, IntermediateData));
 
             CountUpdated?.Invoke(this, new APCount(Data.InternalCount()));
@@ -59,7 +60,11 @@ namespace WifiScannerPedwar.Services
         public void TriggerScan()
         {
             SDD.WriteLine("Scan triggered!");
-            WScanner.TriggerScan();
+
+            if (WScanner != null)
+            { WScanner.TriggerScan(); }
+            else
+            { ErrorBox("Error!", "WScanner was null!"); }
         }
 
         public async Task SaveToFile(IStorageProvider Storage)
@@ -125,19 +130,5 @@ namespace WifiScannerPedwar.Services
 
         public APCount(int _Count)
         { Count = _Count; }
-    }
-
-    public record SnapshotData
-    {
-        [JsonInclude]
-        public TimeSpan LastUpdated { get; private set; }
-        [JsonInclude]
-        public Dictionary<string, WifiInfoItem> Data { get; private set; }
-
-        public SnapshotData(TimeSpan _LastUp, Dictionary<string, WifiInfoItem> _Data)
-        {
-            LastUpdated = _LastUp;
-            Data = _Data;
-        }
     }
 }

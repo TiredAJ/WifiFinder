@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using WifiScannerPedwar.Services;
+using WifiScannerLib;
 
 namespace WifiScannerPedwar
 {
