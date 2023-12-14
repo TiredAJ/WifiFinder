@@ -5,6 +5,7 @@ using MsBox.Avalonia;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace WifiScannerPedwar.Services
         public static IWS? WScanner;
         private List<SnapshotData> Data = new List<SnapshotData>();
         public event EventHandler<APCount> CountUpdated;
-        public Func<Dictionary<string, WifiInfoItem>, Dictionary<string, WifiInfoItem>>? Sorter = null;
+        public Func<Dictionary<string, WifiInfoItem>, Dictionary<string, WifiInfoItem>>? Filter = null;
 
         public WifiService(IWS? _WScanner)
         {
@@ -49,8 +50,12 @@ namespace WifiScannerPedwar.Services
             else
             { SDD.WriteLine("Data was null!"); return; }
 
-            if (Sorter != null)
-            { IntermediateData = Sorter(IntermediateData); }
+            if (Filter != null)
+            { IntermediateData = Filter(IntermediateData); }
+
+            IntermediateData = IntermediateData
+                    .OrderBy(X => X.Key)
+                    .ToDictionary(X => X.Key, Y => Y.Value);
 
             Data.Add(new SnapshotData(DateTime.Now.TimeOfDay, IntermediateData, Data.Count));
 

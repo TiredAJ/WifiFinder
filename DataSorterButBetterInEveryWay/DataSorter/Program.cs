@@ -12,9 +12,16 @@ namespace DataSorter
 
         static void Main(string[] args)
         {
-            DataLoader();
+            //DataLoader();
 
-            FlattenData();
+            //FlattenData();
+            //OrderAPs();
+
+            //while (true)
+            //{
+            //    int Temp = int.Parse(Console.ReadLine());
+            //    Console.WriteLine(WifiInfoItem.GetLevel(Temp));
+            //}
         }
 
         static void DataLoader()
@@ -100,6 +107,51 @@ namespace DataSorter
             //{
             //
             //}
+        }
+
+        private static void OrderAPs()
+        {
+            List<string> FilePaths = Directory.GetFiles
+                (Environment.CurrentDirectory).ToList();
+
+
+            foreach (string FilePath in FilePaths)
+            {
+                List<SnapshotData> TempList;
+
+                using (StreamReader JStream = new StreamReader(FilePath))
+                {
+                    var JNode = JsonNode.Parse
+                        (
+                            JStream.ReadToEnd(),
+                            new JsonNodeOptions() { PropertyNameCaseInsensitive = false },
+                            new JsonDocumentOptions() { AllowTrailingCommas = true }
+                        );
+
+                    TempList = new List<SnapshotData>();
+
+                    SnapshotData SD;
+
+                    foreach (var JN in JNode.AsArray())
+                    {
+                        SD = new SnapshotData(JN);
+
+                        SD.Data = SD.Data
+                            //.OrderByDescending(X => X.Value._RSSI)
+                            .OrderByDescending(X => X.Value.BSSID)
+                            .ToDictionary(X => X.Key, Y => Y.Value);
+
+                        TempList.Add(SD);
+                    }
+                }
+
+                using (StreamWriter Writer = new StreamWriter(FilePath, false))
+                {
+                    Writer.Write(JsonSerializer.Serialize
+                    (TempList, new JsonSerializerOptions()
+                    { WriteIndented = true, IncludeFields = true }));
+                }
+            }
         }
     }
 

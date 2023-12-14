@@ -36,7 +36,7 @@ public class MainViewModel : ViewModelBase
         {/*something to do while waiting for perms*/}
 
         WS.CountUpdated += CountUpdated;
-        WS.Sorter = (In) =>
+        WS.Filter = (In) =>
         {
             List<string> AllowedSSIDs = new List<string>()
             { "usw", "usw-ce", "usw-guest", "usw-openday", "eduroam", "hydra5ghz"};
