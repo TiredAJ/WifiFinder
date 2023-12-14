@@ -70,7 +70,7 @@ public class MainViewModel : ViewModelBase
     public void TriggerScan()
     {
         SDD.WriteLine("MVM Scan triggered!");
-        WS.TriggerScan();
+        WS.CollectData();
     }
 
     public void SaveData(IStorageProvider _ISP)

@@ -57,12 +57,12 @@ namespace WifiScannerPedwar.Services
             CountUpdated?.Invoke(this, new APCount(Data.InternalCount()));
         }
 
-        public void TriggerScan()
+        public void CollectData()
         {
             SDD.WriteLine("Scan triggered!");
 
             if (WScanner != null)
-            { WScanner.TriggerScan(); }
+            { WScanner.CollectData(); }
             else
             { ErrorBox("Error!", "WScanner was null!"); }
         }
