@@ -52,7 +52,7 @@ namespace WifiScannerPedwar.Services
             if (Sorter != null)
             { IntermediateData = Sorter(IntermediateData); }
 
-            Data.Add(new SnapshotData(DateTime.Now.TimeOfDay, IntermediateData));
+            Data.Add(new SnapshotData(DateTime.Now.TimeOfDay, IntermediateData, Data.Count));
 
             CountUpdated?.Invoke(this, new APCount(Data.InternalCount()));
         }

@@ -52,11 +52,14 @@ namespace DataSorter
             //not per AP
 
             foreach (var ID in InitData)
-            {
+            {//ID is a file
+
                 foreach (var Snap in ID)
-                {
+                {//Snap is a snapshot from a file
+
                     foreach (var KVP in Snap.Data)
-                    {
+                    {//KVP is an AP from a snapshot
+
                         if (Intermediate.ContainsKey(KVP.Key))
                         { Intermediate[KVP.Key].Add(new FlattenedData(KVP.Value)); }
                         else
@@ -76,10 +79,10 @@ namespace DataSorter
         {
             string Temp = Path.Combine(Environment.CurrentDirectory, "Summed");
 
-            using (StreamWriter Writer = new StreamWriter())
-            {
-
-            }
+            //using (StreamWriter Writer = new StreamWriter())
+            //{
+            //
+            //}
         }
     }
 
