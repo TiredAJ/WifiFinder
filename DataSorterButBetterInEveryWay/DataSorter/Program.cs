@@ -113,7 +113,9 @@ namespace DataSorter
         {
             List<string> FilePaths = Directory.GetFiles
                 (Environment.CurrentDirectory).ToList();
+            //#30e8e800 ,#3054cf2b,#30009fc7,#307a2ac9,#30db00db,#30cf0000,#30db9200
 
+            var T = "#30E8E8"; //,#3054cf2b,#30009fc7,#307a2ac9,#30db00db,#30cf0000,#30db9200
 
             foreach (string FilePath in FilePaths)
             {
