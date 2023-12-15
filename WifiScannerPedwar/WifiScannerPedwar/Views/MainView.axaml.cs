@@ -12,6 +12,8 @@ public partial class MainView : UserControl
 {
     MainViewModel MVM = new MainViewModel();
 
+    public int Index = 0;
+
     public MainView()
     {
         InitializeComponent();
@@ -24,10 +26,22 @@ public partial class MainView : UserControl
     }
 
     private void Btn_ClearData_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-    { MVM.ClearData(); }
+    {
+        MVM.ClearData();
+
+        Index = 0;
+
+        txt_Index.Text = $"Index {Index}";
+    }
 
     private void Btn_SaveData_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-    { MVM.SaveData(TopLevel.GetTopLevel(btn_SaveData).StorageProvider); }
+    {
+        MVM.SaveData(TopLevel.GetTopLevel(btn_SaveData).StorageProvider);
+
+        Index = 0;
+
+        txt_Index.Text = $"Index {Index}";
+    }
 
     private async void Snapshot_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
@@ -42,5 +56,9 @@ public partial class MainView : UserControl
         MVM.TriggerScan();
 
         SDD.WriteLine("Snapshot taken!");
+
+        Index++;
+
+        txt_Index.Text = $"Index {Index}";
     }
 }
