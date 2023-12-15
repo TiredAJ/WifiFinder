@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 using WifiScannerLib;
@@ -22,6 +23,8 @@ namespace DataSorter
             //    int Temp = int.Parse(Console.ReadLine());
             //    Console.WriteLine(WifiInfoItem.GetLevel(Temp));
             //}
+
+            //Console.WriteLine("38:90:a5:b1:00:25".HexToInt());
         }
 
         static void DataLoader()
@@ -190,6 +193,13 @@ namespace DataSorter
                             .Average();
 
             return Temp;
+        }
+
+        public static Int128 HexToInt(this string _In)
+        {
+            _In = _In.Replace(":", "");
+
+            return Int128.Parse(_In, NumberStyles.HexNumber);
         }
     }
 }
