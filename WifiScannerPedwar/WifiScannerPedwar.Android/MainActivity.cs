@@ -1,17 +1,13 @@
 ﻿using Android;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
+
 using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
-using System.Threading.Tasks;
-using WifiScannerLib;
-using WifiScannerPedwar.Services;
-using WifiScannerPedwar.ViewModels;
+
 using System.Collections.Generic;
-using Android.Content;
-using Android.Service.Controls.Templates;
-using SDD = System.Diagnostics.Debug;
 
 namespace WifiScannerPedwar.Android;
 
@@ -32,6 +28,9 @@ public class MainActivity : AvaloniaMainActivity<App>
     {
         List<string> TempPerms = new List<string>();
         CTX = this.ApplicationContext;
+
+        if (CTX == null)
+        { throw new System.Exception("CTX was null!"); }
 
 #if ANDROID23_0_OR_GREATER
         //goes through and checks what permissions we have vs what we need
@@ -60,7 +59,8 @@ public class MainActivity : AvaloniaMainActivity<App>
         //default boilerplate stuff idk
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
-            .UseReactiveUI();
+            .UseReactiveUI()
+            .LogToTrace(Avalonia.Logging.LogEventLevel.Fatal);
     }
 
     //this is called when the result of the permission request is received
@@ -72,7 +72,10 @@ public class MainActivity : AvaloniaMainActivity<App>
 
         //checks if context isn't null, then sets IWS stuff to android version
         if (CTX != null)
-        {WifiScannerPedwar.App.IWScanner = new WifiScannerLib.AndroidWS(CTX);}
+        {
+            WifiScannerPedwar.App.IWScanner = new WifiScannerLib.AndroidWS(CTX);
+            WifiScannerPedwar.ViewModels.MainViewModel.Initialise(new WifiScannerLib.AndroidWS(CTX));
+        }
         else
         { throw new System.Exception("**** Heyo, CTX was null pall ****"); }
     }

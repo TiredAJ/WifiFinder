@@ -1,46 +1,64 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:WifiScannerPedwar.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="WifiScannerPedwar.Views.MainView"
-             x:DataType="vm:MainViewModel">
-	
-	<DockPanel>
-		<!--main data grid-->
-		<DataGrid x:Name="DGRD_APData" Margin="15" ItemsSource="{Binding WifiList.Items, Mode=OneWay}"
-					AutoGenerateColumns="False" GridLinesVisibility="All" BorderThickness="2"
-					IsReadOnly="True" VerticalScrollBarVisibility="Visible" 
-					HorizontalScrollBarVisibility="Visible" SelectionMode="Extended"
-					DockPanel.Dock="Top" >
-			
-			<!--some styles for the data grid-->
-			<DataGrid.Styles>
-				<Style Selector="DataGridCell">
-					<Setter Property="Focusable" Value="False"/>
-				</Style>
-				
-				<Style Selector="DataGridTextColumn">
-					<Setter Property="FontSize" Value="36"/>
-					<Setter Property="FontFamily" Value="Consolas"/>
-				</Style>
-				
-				<Style Selector="DataGridColumnHeader">
-					<Setter Property="FontWeight" Value="Heavy"/>
-					<Setter Property="HorizontalAlignment" Value="Center"/>
-					<Setter Property="Focusable" Value="False"/>
-				</Style>
-			</DataGrid.Styles>
+<UserControl
+    x:Class="WifiScannerPedwar.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:WifiScannerPedwar.ViewModels"
+    d:DesignHeight="3200"
+    d:DesignWidth="1440"
+    x:DataType="vm:MainViewModel"
+    mc:Ignorable="d">
 
-			<!--Predefined columns (because had some issue w/ binding and autogen columns)-->
-			<DataGrid.Columns>				
-				<DataGridTextColumn Header="BSSID" Binding="{Binding BSSID}" FontWeight="Bold"/>
-				<DataGridTextColumn Header="SSID" Binding="{Binding SSID}"/>
-				<DataGridTextColumn Header="RSSI" Binding="{Binding RSSI}"/>
-				<DataGridTextColumn Header="Capabilities" Binding="{Binding Capabilities}" IsVisible="True"/>
-				<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated}" IsVisible="False"/>
-			</DataGrid.Columns>
-		</DataGrid>
-	</DockPanel>
+    <UserControl.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="20" />
+			<Setter Property="Margin" Value="10"/>
+        </Style>
+		<Style Selector="Button">
+			<Setter Property="HorizontalAlignment" Value="Center" />
+			<Setter Property="MinWidth" Value="250" />
+			<Setter Property="MinHeight" Value="45" />
+			<Setter Property="Margin" Value="5"/>
+		</Style>
+    </UserControl.Styles>
+
+    <DockPanel>
+        <Separator
+            Height="5"
+            Background="Transparent"
+            DockPanel.Dock="Top" />
+
+        <TextBlock
+            Margin="5"
+            DockPanel.Dock="Top"
+            TextWrapping="WrapWithOverflow">
+            My favourite part was when the scanner said<LineBreak />
+            "It's scannin' time"</TextBlock>
+
+		<StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" HorizontalAlignment="Center">
+			<StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+			    <TextBlock x:Name="txt_NoAPs" Text="{Binding APCountText, Mode=OneWay}">
+				    No APs Scanned atm
+			    </TextBlock>
+			    <TextBlock x:Name="txt_Index">
+				    Index = 0
+			    </TextBlock>				
+			</StackPanel>
+		    <StackPanel Orientation="Vertical">
+                <Button x:Name="btn_ScanNow">
+                    <TextBlock>Collect data!</TextBlock>
+                </Button>
+                <Button x:Name="btn_SaveData">
+                    <TextBlock>Save data!</TextBlock>
+                </Button>
+			    <Button x:Name="btn_ClearData">
+				    <TextBlock>Clear data</TextBlock>
+			    </Button>			
+		    </StackPanel>			
+		</StackPanel>		
+    </DockPanel>
 </UserControl>

@@ -1,53 +1,81 @@
-﻿using System.Collections.Generic;
-using WifiScannerPedwar.Services;
+﻿using Avalonia.Platform.Storage;
+
+using ReactiveUI;
+
+using System.Collections.Generic;
+using System.Linq;
+
 using WifiScannerLib;
-using Microsoft.CodeAnalysis;
+
+using WifiScannerPedwar.Services;
 
 using SDD = System.Diagnostics.Debug;
-using System.Linq;
+
 
 namespace WifiScannerPedwar.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    WifiService WS;
-    Avalonia.Threading.DispatcherTimer Amserwr;
+    private static WifiService WS;
+    public static bool IsInitialised = false;
+
+    private string _APCountText = "No APs scanned :/";
+
+    public string APCountText
+    {
+        get => _APCountText;
+        private set => this.RaiseAndSetIfChanged(ref _APCountText, value);
+    }
 
     public MainViewModel(IWS? _IWScanner)
     {
-        //checks if the inputted IWS isn't null (it is on initialisation/perm requesting)
+        //checks if the in-putted IWS isn't null (it is on initialisation/perm requesting)
         if (_IWScanner != null)
-        {
-            //creates a new wifi service using the selected IWS
-            WS = new WifiService(_IWScanner);
-
-            //creates a dispatch timer for scheduling scans
-            Amserwr = new Avalonia.Threading.DispatcherTimer();
-        
-            //initial data nabbing
-            var Data = WS.GetItems();
-
-            //sets up the dispatchtimer
-            Amserwr.Interval = new System.TimeSpan(0, 0, 5);
-            Amserwr.Tick += Tick;
-            Amserwr.Start();
-
-            //generates new data holder
-            WifiList = new WifiViewModel(Data);
-
-            //temp
-            SDD.WriteLine("Item's gought");
-        }
+        { Initialise(_IWScanner); }
         else
-        {/*something to do while waiting for perms?*/}
+        {/*something to do while waiting for perms*/}
+
+        WS.CountUpdated += CountUpdated;
+        WS.Filter = (In) =>
+        {
+            List<string> AllowedSSIDs = new List<string>()
+            { "usw", "usw-ce", "usw-guest", "usw-openday", "eduroam", "hydra5ghz"};
+
+            In = In.Where(X => AllowedSSIDs.Contains(X.Value.SSID.ToLower()))
+                    .ToDictionary(X => X.Key, Y => Y.Value);
+
+            return In;
+        };
     }
 
-    private void Tick(object? sender, System.EventArgs e)
+    public MainViewModel()
+    { }
+
+    public static void Initialise(IWS _IWScanner)
     {
-        //calls add items and asks WS to generate new results
-        WifiList.AddItems(WS.GetItems());
+        //creates a new wifi service using the selected IWS
+        WS = new WifiService(_IWScanner);
+
+        IsInitialised = true;
     }
 
-    //data holder
-    public WifiViewModel WifiList { get; }
+    private void CountUpdated(object? sender, APCount e)
+    {
+        if (e.Count == 0)
+        { APCountText = "Ready to collect data!"; }
+        else
+        { APCountText = $"{e.Count} AP('s) collected!"; }
+    }
+
+    public void TriggerScan()
+    {
+        SDD.WriteLine("MVM Scan triggered!");
+        WS.CollectData();
+    }
+
+    public void SaveData(IStorageProvider _ISP)
+    { _ = WS.SaveToFile(_ISP); }
+
+    public void ClearData()
+    { WS.ClearData(); }
 }

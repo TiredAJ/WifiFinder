@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DataSorter": {
+      "commandName": "Project",
+      "workingDirectory": "E:\\GitHub\\_Individual Project\\WifiFinder-Survey\\ScanData\\Live Test\\J1-East"
+    }
+  }
+}

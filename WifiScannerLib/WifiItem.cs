@@ -41,6 +41,11 @@ namespace WifiScannerLib
 	        {SSID = "*Hidden*";}
             else
 	        {SSID = SSID.Trim('\"', ' ');}
+
+
+            PrimaryFrequency = _SR.Frequency;
+
+            _Distance = DistanceCalc(PrimaryFrequency, _RSSI);
         }
 #endif
         #endregion
@@ -59,14 +64,26 @@ namespace WifiScannerLib
 
         public string BSSID { get; set; } = string.Empty;
         public string SSID { get; set; } = string.Empty;
+	
         private float _RSSI = -101;
         public string RSSI
         {
             get => _RSSI.ToString("#dbm");
             set => _RSSI = float.Parse(value); 
         }
+	
         public string Capabilities { get; set; } = string.Empty;
         public TimeSpan LastUpdated { get; set; } = TimeSpan.Zero;
+	
+	private double _Distance {get; set;} = 0d;
+        public string Distance
+        {
+            get => $"{_Distance.ToString("F2")}m";
+            set => _Distance = double.Parse(value);
+        }
+
+        public double PrimaryFrequency { get; set; } = 0d;
+
 
         public WifiInfoItem Clone()
         {return this.MemberwiseClone() as WifiInfoItem;}
@@ -85,6 +102,12 @@ namespace WifiScannerLib
             {return true;}
             else
             {return false;}
+        }
+
+        private static double DistanceCalc(double _Frequency, float _RSSI)
+        {
+            //10^((27.55 - 20*log10(f) + |R|)/20)
+            return Math.Pow(10, (27.55d - 20 * Math.Log10(_Frequency) + Math.Abs(_RSSI))/20d);
         }
     }
 }

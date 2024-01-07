@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34112.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WifiScannerPedwar", "WifiScannerPedwar\WifiScannerPedwar.csproj", "{99035453-AA23-4371-BE2C-733CC4E52D24}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WifiScannerPedwar.Android", "WifiScannerPedwar.Android\WifiScannerPedwar.Android.csproj", "{16F1C11C-6765-425A-AAC1-5061E8D12178}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WifiScannerPedwar.Desktop", "WifiScannerPedwar.Desktop\WifiScannerPedwar.Desktop.csproj", "{D88C8F19-2AEA-46B5-8A0A-2781C3E75556}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WifiScannerPedwar.iOS", "WifiScannerPedwar.iOS\WifiScannerPedwar.iOS.csproj", "{B0E4C1E9-E3B1-4786-AB2D-A9710995147E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WifiScannerLib", "..\..\WifiScannerLib\WifiScannerLib.csproj", "{08D2ADF8-0B09-44BB-AA55-BC21C08DBF1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WifiLibSerialisationTester", "WifiLibSerialisationTester\WifiLibSerialisationTester.csproj", "{E9882D03-A64A-4A3B-8455-43C399272AC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSorter", "..\DataSorterButBetterInEveryWay\DataSorter\DataSorter.csproj", "{A83CA9CC-6CA5-4656-96B7-38DC1DC9BCE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99035453-AA23-4371-BE2C-733CC4E52D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99035453-AA23-4371-BE2C-733CC4E52D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99035453-AA23-4371-BE2C-733CC4E52D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99035453-AA23-4371-BE2C-733CC4E52D24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F1C11C-6765-425A-AAC1-5061E8D12178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F1C11C-6765-425A-AAC1-5061E8D12178}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F1C11C-6765-425A-AAC1-5061E8D12178}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{16F1C11C-6765-425A-AAC1-5061E8D12178}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F1C11C-6765-425A-AAC1-5061E8D12178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F1C11C-6765-425A-AAC1-5061E8D12178}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D88C8F19-2AEA-46B5-8A0A-2781C3E75556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D88C8F19-2AEA-46B5-8A0A-2781C3E75556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D88C8F19-2AEA-46B5-8A0A-2781C3E75556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D88C8F19-2AEA-46B5-8A0A-2781C3E75556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0E4C1E9-E3B1-4786-AB2D-A9710995147E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0E4C1E9-E3B1-4786-AB2D-A9710995147E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0E4C1E9-E3B1-4786-AB2D-A9710995147E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B0E4C1E9-E3B1-4786-AB2D-A9710995147E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0E4C1E9-E3B1-4786-AB2D-A9710995147E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0E4C1E9-E3B1-4786-AB2D-A9710995147E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{08D2ADF8-0B09-44BB-AA55-BC21C08DBF1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D2ADF8-0B09-44BB-AA55-BC21C08DBF1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D2ADF8-0B09-44BB-AA55-BC21C08DBF1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D2ADF8-0B09-44BB-AA55-BC21C08DBF1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9882D03-A64A-4A3B-8455-43C399272AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9882D03-A64A-4A3B-8455-43C399272AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9882D03-A64A-4A3B-8455-43C399272AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9882D03-A64A-4A3B-8455-43C399272AC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A83CA9CC-6CA5-4656-96B7-38DC1DC9BCE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A83CA9CC-6CA5-4656-96B7-38DC1DC9BCE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A83CA9CC-6CA5-4656-96B7-38DC1DC9BCE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A83CA9CC-6CA5-4656-96B7-38DC1DC9BCE8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B30EAE61-549C-40A0-9F3D-6DE6E3F61A33}
+	EndGlobalSection
+EndGlobal
