@@ -10,12 +10,19 @@ class Program
 {
     static List<List<SnapshotData>> InitData = new List<List<SnapshotData>>();
     static Dictionary<string, FlattenedData> Data = new Dictionary<string, FlattenedData>();
+    //wtf was the string for?
 
     static void Main(string[] args)
     {
         DataLoader();
 
-        SortData();
+        Dictionary<int, FlattenedData> Data = new();
+
+        foreach (var Item in SortData())
+        { Data.Add(Item.Key, CompressSnapshots(Item.Value)); }
+
+
+        //SortData();
         //OrderAPs();
 
         //while (true)
@@ -62,7 +69,7 @@ class Program
         Console.WriteLine(InitData.Count());
     }
 
-    static void SortData()
+    static Dictionary<int, List<SnapshotData>> SortData()
     {
         Dictionary<int, List<SnapshotData>> Intermediate = new();
         //         ^Node       ^Data
@@ -91,13 +98,48 @@ class Program
             }
         }
 
+        //Intermediate holds the data for each node in the corridor
+
+        return Intermediate;
 
         Console.WriteLine("Donezo");
     }
 
-    private FlattenedData Compress(int _Node, List<SnapshotData> _Data)
+    private static FlattenedData CompressSnapshots(List<SnapshotData> _Data)
+    {
+        Dictionary<string, List<WifiInfoItem>> APs = new();
+
+        //Gets all the APs and collects them by 
+        foreach (var Snap in _Data)
+        {
+            foreach (var AP in Snap.Data)
+            {
+                if (APs.ContainsKey(AP.Key))
+                { APs[AP.Key].Add(AP.Value); }
+                else
+                { APs.Add(AP.Key, new() { AP.Value }); }
+            }
+        }
+
+        //removes APs that are present only once
+        foreach (var AP in APs)
+        {
+            if (AP.Value.Count() < 2)
+            { APs.Remove(AP.Key); }
+        }
+
+
+
+
+
+        throw new NotImplementedException();
+    }
+
+    private static FlattenedData CompressAPs(KeyValuePair<string, List<WifiInfoItem>> _AP)
     {
 
+
+        throw new NotImplementedException();
     }
 
     private static void PushData(
@@ -214,3 +256,4 @@ public static class Extensions
         return Int128.Parse(_In, NumberStyles.HexNumber);
     }
 }
+
