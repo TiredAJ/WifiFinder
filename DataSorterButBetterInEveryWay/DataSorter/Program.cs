@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿// Ignore Spelling: BSSID RSSI SSID
+
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
@@ -10,7 +12,7 @@ class Program
 {
     static List<List<SnapshotData>> InitData = new List<List<SnapshotData>>();
     static Dictionary<string, FlattenedData> Data = new Dictionary<string, FlattenedData>();
-    //wtf was the string for?
+    //wtf was the string for? AP
 
     static void Main(string[] args)
     {
@@ -126,8 +128,33 @@ class Program
         {
             if (AP.Value.Count() < 2)
             { APs.Remove(AP.Key); }
+
+            var AverageRSSI = AP.Value.Select(X => X._RSSI).Average();
+
+            if (AverageRSSI < -80)
+            { APs.Remove(AP.Key); }
         }
 
+        //At this point, we have a collection of APs for a node in a corridor
+
+        foreach (var Node in APs)
+        {
+            FlattenedData Temp = new();
+
+            Temp.Distance = Node.Value
+                            .Select(X => X._Distance)
+                            .Average();
+
+            Temp.RSSI = (int)Node.Value
+                            .Select(X => X._RSSI)
+                            .Average();
+
+            var Freq = Node.Value
+                                .Select(X => X.PrimaryFrequency)
+                                .ToList();
+
+
+        }
 
 
 
@@ -216,10 +243,16 @@ class Program
 
 public struct FlattenedData
 {
-    public int RSSI { get; set; }
-    public double Distance { get; set; }
+    public int RSSI { get; set; } = 1;
+    public float Distance { get; set; } = -1;
+    public float PrimaryFrequency { get; set; } = -1;
+    public string BSSID { get; set; } = string.Empty;
+    public string SSID { get; set; } = string.Empty;
 
-    public FlattenedData(int _RSSI, double _Distance)
+    public FlattenedData()
+    { }
+
+    public FlattenedData(int _RSSI, float _Distance)
     {
         RSSI = _RSSI;
         Distance = _Distance;
@@ -229,26 +262,14 @@ public struct FlattenedData
     {
         RSSI = _WII._RSSI;
         Distance = _WII._Distance;
+        PrimaryFrequency = _WII.PrimaryFrequency;
+        BSSID = _WII.BSSID;
+        SSID = _WII.SSID;
     }
 }
 
 public static class Extensions
 {
-    public static FlattenedData Average(this List<FlattenedData> _Input)
-    {
-        FlattenedData Temp = new FlattenedData();
-
-        Temp.RSSI = (int)_Input
-                        .Select(X => X.RSSI)
-                        .Average();
-
-        Temp.Distance = _Input
-                        .Select(X => X.Distance)
-                        .Average();
-
-        return Temp;
-    }
-
     public static Int128 HexToInt(this string _In)
     {
         _In = _In.Replace(":", "");

@@ -5,6 +5,7 @@ using Avalonia.ReactiveUI;
 
 using System;
 
+
 namespace WifiScannerPedwar.Desktop;
 
 class Program
