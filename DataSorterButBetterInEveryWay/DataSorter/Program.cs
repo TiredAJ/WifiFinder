@@ -129,10 +129,17 @@ class Program
             if (AP.Value.Count() < 2)
             { APs.Remove(AP.Key); }
 
-            var AverageRSSI = AP.Value.Select(X => X._RSSI).Average();
-
-            if (AverageRSSI < -80)
+            if (AP.Value.Select(X => X._RSSI).Average() < -80)
             { APs.Remove(AP.Key); }
+
+            if (AP.Value.Select(X => X.PrimaryFrequency).GroupBy(X => X).Count() > 1)
+            {
+                APs[AP.Key] = AP.Value
+                                    .Select(X => X.PrimaryFrequency)
+                                    .GroupBy(X => X)
+                                    .OrderByDescending(X => X)
+                                    .First();
+            }
         }
 
         //At this point, we have a collection of APs for a node in a corridor
@@ -144,16 +151,6 @@ class Program
             Temp.Distance = Node.Value
                             .Select(X => X._Distance)
                             .Average();
-
-            Temp.RSSI = (int)Node.Value
-                            .Select(X => X._RSSI)
-                            .Average();
-
-            var Freq = Node.Value
-                                .Select(X => X.PrimaryFrequency)
-                                .ToList();
-
-
         }
 
 
@@ -243,26 +240,32 @@ class Program
 
 public struct FlattenedData
 {
-    public int RSSI { get; set; } = 1;
+    //public int RSSI { get; set; } = 1;
     public float Distance { get; set; } = -1;
-    public float PrimaryFrequency { get; set; } = -1;
+    //public float PrimaryFrequency { get; set; } = -1;
     public string BSSID { get; set; } = string.Empty;
     public string SSID { get; set; } = string.Empty;
+
+    //what if it doesn't store the RSSI? (or PF)
+    //hear me out
+    //what if the AP changes it's primary frequency (PF) due to traffic etc.
+    //then the rssi is gonna change and nothing matches
+    //but also the BSSID has a chance to change perhaps. Lower risk?
 
     public FlattenedData()
     { }
 
-    public FlattenedData(int _RSSI, float _Distance)
+    public FlattenedData(/*int _RSSI,*/ float _Distance)
     {
-        RSSI = _RSSI;
+        /*RSSI = _RSSI;*/
         Distance = _Distance;
     }
 
     public FlattenedData(WifiInfoItem _WII)
     {
-        RSSI = _WII._RSSI;
+        /*RSSI = _WII._RSSI;*/
         Distance = _WII._Distance;
-        PrimaryFrequency = _WII.PrimaryFrequency;
+        /*PrimaryFrequency = _WII.PrimaryFrequency;*/
         BSSID = _WII.BSSID;
         SSID = _WII.SSID;
     }
