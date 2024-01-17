@@ -12,7 +12,9 @@ class Program
 {
     static List<List<SnapshotData>> InitData = new List<List<SnapshotData>>();
     static Dictionary<string, FlattenedData> Data = new Dictionary<string, FlattenedData>();
-    //wtf was the string for? AP
+    //wtf was the string for? AP - AP BSSID?
+
+    public static int CollidingBSSIDs = 0;
 
     static void Main(string[] args)
     {
@@ -123,14 +125,23 @@ class Program
             }
         }
 
-        //removes APs that are present only once
+        //filters out APs that:
+        // - Are below -80dbm RSSI
+        // - Appear less than 3 times
+        // - have varying SSIDs
         foreach (var AP in APs)
         {
-            if (AP.Value.Count() < 2)
+            if (AP.Value.Count() < 3)
             { APs.Remove(AP.Key); }
 
             if (AP.Value.Select(X => X._RSSI).Average() < -80)
             { APs.Remove(AP.Key); }
+
+            if (AP.Value.Select(X => X.SSID).GroupBy(X => X).Count() > 1)
+            {
+                APs.Remove(AP.Key);
+                CollidingBSSIDs++;
+            }
 
             if (AP.Value.Select(X => X.PrimaryFrequency).GroupBy(X => X).Count() > 1)
             {
@@ -149,18 +160,37 @@ class Program
             }
         }
 
+
         //At this point, we have a collection of APs for a node in a corridor
+        float Max, Min, Median = 0;
+        IEnumerable<float> Distances;// = new();
 
         foreach (var Node in APs)
         {
-            FlattenedData Temp = new();
+            FlattenedData Temp = new()
+            { BSSID = Node.Key, SSID = Node.Value.First().SSID };
 
             Temp.Distance = Node.Value
                             .Select(X => X._Distance)
                             .Average();
+
+            Distances = Node.Value
+                        .Select(X => X._Distance);
+
+            Max = Distances.Max();
+            Min = Distances.Min();
+
+            if (Distances.Count() == 2)
+            { Temp.DistanceDeviance = (int)(Max - Min); }
+            else
+            {
+                Median = Distances
+                            .OrderByDescending(X => X)
+                            .ElementAt((int)Math.Floor((double)Distances.Count() / 2d));
+
+                Temp.DistanceDeviance = (int)((Max - Median) + (Median - Min)) / 2;
+            }
         }
-
-
 
 
         throw new NotImplementedException();
@@ -250,6 +280,7 @@ public struct FlattenedData
     //public int RSSI { get; set; } = 1;
     public float Distance { get; set; } = -1;
     //public float PrimaryFrequency { get; set; } = -1;
+    public int DistanceDeviance { get; set; } = 0;
     public string BSSID { get; set; } = string.Empty;
     public string SSID { get; set; } = string.Empty;
 
