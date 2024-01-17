@@ -39,7 +39,7 @@ public class MainViewModel : ViewModelBase
         WS.Filter = (In) =>
         {
             List<string> AllowedSSIDs = new List<string>()
-            { "usw", "usw-ce", "usw-guest", "usw-openday", "eduroam", "hydra5ghz"};
+            { "usw", "usw-ce", "usw-guest", "usw-openday", "eduroam"};
 
             In = In.Where(X => AllowedSSIDs.Contains(X.Value.SSID.ToLower()))
                     .ToDictionary(X => X.Key, Y => Y.Value);

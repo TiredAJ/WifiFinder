@@ -1,5 +1,6 @@
 ﻿// Ignore Spelling: BSSID RSSI SSID
 
+using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -15,7 +16,7 @@ class Program
     //wtf was the string for? AP - AP BSSID?
 
     public static int CollidingBSSIDs = 0;
-
+    public static int APCount = 0;
     static void Main(string[] args)
     {
         DataLoader();
@@ -23,9 +24,13 @@ class Program
         Dictionary<int, FlattenedData> Data = new();
 
         foreach (var Item in SortData())
-        { Data.Add(Item.Key, CompressSnapshots(Item.Value)); }
+        {
+            /*Data.Add(Item.Key,*/
+            CompressSnapshots(Item.Value); //);
+        }
 
-
+        Console.WriteLine($"\n\nBSSID Collisions: {CollidingBSSIDs}");
+        Console.WriteLine($"Total APs: {APCount}");
         //SortData();
         //OrderAPs();
 
@@ -69,8 +74,6 @@ class Program
                 //InitData.Add(TempList);
             }
         }
-
-        Console.WriteLine(InitData.Count());
     }
 
     static Dictionary<int, List<SnapshotData>> SortData()
@@ -109,7 +112,7 @@ class Program
         Console.WriteLine("Donezo");
     }
 
-    private static FlattenedData CompressSnapshots(List<SnapshotData> _Data)
+    private static List<FlattenedData> CompressSnapshots(List<SnapshotData> _Data)
     {
         Dictionary<string, List<WifiInfoItem>> APs = new();
 
@@ -129,18 +132,31 @@ class Program
         // - Are below -80dbm RSSI
         // - Appear less than 3 times
         // - have varying SSIDs
+        // - Are named "Hydra5GHz", not really sure atm what they are
+        //      but they're causing a lot of BSSID collisions
         foreach (var AP in APs)
         {
-            if (AP.Value.Count() < 3)
-            { APs.Remove(AP.Key); }
+            AP.Value.RemoveAll(X => X.SSID == "Hydra5GHz");
+
+            if (AP.Value.Count() < 2)
+            {
+                APs.Remove(AP.Key);
+                continue;
+            }
 
             if (AP.Value.Select(X => X._RSSI).Average() < -80)
             { APs.Remove(AP.Key); }
 
             if (AP.Value.Select(X => X.SSID).GroupBy(X => X).Count() > 1)
             {
-                APs.Remove(AP.Key);
+                Debug.WriteLine($"\nColliders: {AP.Key}");
+
+                foreach (var WII in AP.Value)
+                { Debug.Write($"\t{WII.SSID}, "); }
+
                 CollidingBSSIDs++;
+
+                APs.Remove(AP.Key);
             }
 
             if (AP.Value.Select(X => X.PrimaryFrequency).GroupBy(X => X).Count() > 1)
@@ -158,6 +174,8 @@ class Program
                 //and 11% between the minimum and the median, call it 10.5% deviation
                 //and store that too?
             }
+
+            APCount++;
         }
 
 
@@ -192,8 +210,10 @@ class Program
             }
         }
 
+        return new();
 
-        throw new NotImplementedException();
+
+        //throw new NotImplementedException();
     }
 
     private static FlattenedData CompressAPs(KeyValuePair<string, List<WifiInfoItem>> _AP)
