@@ -134,11 +134,18 @@ class Program
 
             if (AP.Value.Select(X => X.PrimaryFrequency).GroupBy(X => X).Count() > 1)
             {
-                APs[AP.Key] = AP.Value
-                                    .Select(X => X.PrimaryFrequency)
-                                    .GroupBy(X => X)
-                                    .OrderByDescending(X => X)
-                                    .First();
+                //APs[AP.Key] = AP.Value
+                //                    .Select(X => X.PrimaryFrequency)
+                //                    .GroupBy(X => X)
+                //                    .OrderByDescending(X => X)
+                //                    .First();
+
+                //Because we're basically just using distance at this point
+                //What if we store the average "deviance" or range between
+                //the distance values?
+                //So if it's like 10% difference between the max value and the median
+                //and 11% between the minimum and the median, call it 10.5% deviation
+                //and store that too?
             }
         }
 
