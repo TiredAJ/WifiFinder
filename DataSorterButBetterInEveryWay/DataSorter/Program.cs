@@ -216,7 +216,7 @@ class Program
         //throw new NotImplementedException();
     }
 
-    private static FlattenedData CompressAPs(KeyValuePair<string, List<WifiInfoItem>> _AP)
+    /*private static FlattenedData CompressAPs(KeyValuePair<string, List<WifiInfoItem>> _AP)
     {
 
 
@@ -238,7 +238,7 @@ class Program
                         { new FlattenedData(KVP.Value) });
             }
         }
-    }
+    }*/
 
     private void SaveData()
     {
